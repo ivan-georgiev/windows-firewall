@@ -1,0 +1,437 @@
+{
+  "AuthorizedServices": {
+    "Qwave": [
+      "Windows Media Player Network Sharing Service (qWave-TCP-Out)",
+      "Windows Media Player Network Sharing Service (qWave-UDP-Out)"
+    ],
+    "FrameServer": [
+      "Microsoft Media Foundation Network Source OUT [TCP ALL]"
+    ],
+    "iphlpsvc": [
+      "Core Networking - Teredo (UDP-Out)",
+      "Core Networking - IPHTTPS (TCP-Out)"
+    ],
+    "dhcp": [
+      "Core Networking - Dynamic Host Configuration Protocol (DHCP-Out)",
+      "Core Networking - Dynamic Host Configuration Protocol for IPv6(DHCPV6-Out)"
+    ],
+    "Ssdpsrv": [
+      "Network Discovery (SSDP-Out)",
+      "Windows Media Player Network Sharing Service (SSDP-Out)"
+    ],
+    "upnphost": [
+      "Network Discovery (UPnPHost-Out)",
+      "Windows Media Player Network Sharing Service (UPnPHost-Out)"
+    ],
+    "DiagTrack": [
+      "Connected User Experiences and Telemetry"
+    ],
+    "dnscache": [
+      "Core Networking - DNS (UDP-Out)",
+      "Network Discovery (LLMNR-UDP-Out)",
+      "mDNS (UDP-Out)",
+      "File and Printer Sharing (LLMNR-UDP-Out)"
+    ],
+    "WlanSvc": [
+      "WFD ASP Coordination Protocol (UDP-Out)"
+    ],
+    "TroubleshootingSvc": [
+      "Recommended Troubleshooting Client (HTTP/HTTPS Out)"
+    ],
+    "DmEnrollmentSvc": [
+      "Windows Device Management Enrollment Service (TCP out)"
+    ],
+    "winmgmt": [
+      "Hyper-V - WMI (TCP-Out)",
+      "Hyper-V Management Clients - WMI (TCP-Out)"
+    ],
+    "cloudidsvc": [
+      "Cloud Identity (TCP-Out)"
+    ],
+    "fdphost": [
+      "Network Discovery (WSD Events-Out)",
+      "Network Discovery (UPnP-Out)",
+      "Network Discovery (WSD EventsSecure-Out)",
+      "Network Discovery (WSD-Out)"
+    ],
+    "fdrespub": [
+      "Network Discovery (Pub WSD-Out)"
+    ]
+  },
+  "AuthorizedApps": {
+    "ms-resource:DisplayName": [
+      "Email and accounts",
+      "Microsoft family features",
+      "Desktop App Web Viewer",
+      "Windows Defender SmartScreen"
+    ],
+    "ms-resource:System_Item_Title_IntelGraphicsControlPanel": [
+      "@{AppUp.IntelGraphicsExperience_1.100.3370.0_x64__8j3eq9eme6ctt?ms-resource://AppUp.IntelGraphicsExperience/Resources/System_Item_Title_IntelGraphicsControlPanel}"
+    ],
+    "ms-resource:app_name_ms_todo": [
+      "@{Microsoft.Todos_2.57.43142.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.Todos/Resources/app_name_ms_todo}"
+    ],
+    "NcsiUwpApp": [
+      "NcsiUwpApp"
+    ],
+    "ms-resource:AppStoreName": [
+      "@{Microsoft.People_10.2105.4.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.People/Resources/AppStoreName}",
+      "@{Microsoft.WindowsCalculator_11.2109.9.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsCalculator/Resources/AppStoreName}",
+      "@{Microsoft.WindowsFeedbackHub_1.2111.3131.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsFeedbackHub/Resources/AppStoreName}",
+      "@{Microsoft.WindowsMaps_10.2104.2.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsMaps/Resources/AppStoreName}",
+      "Windows Terminal",
+      "@{Microsoft.WindowsAlarms_11.2109.1.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsAlarms/Resources/AppStoreName}",
+      "@{Microsoft.Windows.Photos_2021.21100.20007.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.Windows.Photos/Resources/AppStoreName}",
+      "@{Microsoft.Getstarted_10.7.42522.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.Getstarted/Resources/AppStoreName}"
+    ],
+    "Xbox Game Bar Plugin": [
+      "Xbox Game Bar Plugin",
+      "Xbox Game Bar Plugin"
+    ],
+    "ms-resource:DisplayTitle": [
+      "@{Microsoft.StorePurchaseApp_12109.1001.10.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.StorePurchaseApp/Resources/DisplayTitle}"
+    ],
+    "myHP": [
+      "myHP"
+    ],
+    "HP Privacy Settings": [
+      "HP Privacy Settings"
+    ],
+    "Tile": [
+      "Tile"
+    ],
+    "Microsoft 365 (Office)": [
+      "Office"
+    ],
+    "Skype": [
+      "Skype"
+    ],
+    "HP QuickDrop": [
+      "HP QuickDrop",
+      "HP QuickDrop"
+    ],
+    "ms-resource:PkgDisplayName": [
+      "Mixed Reality Portal",
+      "Mixed Reality Portal",
+      "Windows Shell Experience",
+      "Xbox Game UI"
+    ],
+    "OneNote for Windows 10": [
+      "OneNote for Windows 10"
+    ],
+    "ms-resource:Common.View.UWP/Resources/StoreAppName": [
+      "@{Microsoft.Microsoft3DViewer_7.2107.7012.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.Microsoft3DViewer/Common.View.UWP/Resources/StoreAppName}"
+    ],
+    "ms-resource:appDisplayName": [
+      "@{Microsoft.DesktopAppInstaller_1.16.12986.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.DesktopAppInstaller/Resources/appDisplayName}",
+      "@{Microsoft.GetHelp_10.2109.42921.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.GetHelp/Resources/appDisplayName}",
+      "Narrator",
+      "Windows Default Lock Screen",
+      "Microsoft Content",
+      "Captive Portal Flow",
+      "Captive Portal Flow"
+    ],
+    "Cortana": [
+      "Cortana"
+    ],
+    "Solitaire & Casual Games": [
+      "Microsoft Solitaire Collection"
+    ],
+    "ms-resource:AppName": [
+      "@{Microsoft.MSPaint_6.2105.4017.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.MSPaint/resources/AppName}"
+    ],
+    "Game Bar": [
+      "Xbox Game Bar"
+    ],
+    "ms-resource:appDescription": [
+      "Your account"
+    ],
+    "Microsoft Whiteboard": [
+      "Microsoft Whiteboard"
+    ],
+    "ms-resource:StickyNotesStoreAppName": [
+      "@{Microsoft.MicrosoftStickyNotes_4.1.9.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.MicrosoftStickyNotes/Resources/StickyNotesStoreAppName}"
+    ],
+    "ms-resource:ProductPkgDisplayName": [
+      "Windows Feature Experience Pack"
+    ],
+    "Intel(R) Management and Security Status": [
+      "Intel(R) Management and Security Status"
+    ],
+    "HP Support Assistant": [
+      "HP Support Assistant"
+    ],
+    "ms-resource://microsoft.windowscommunicationsapps/hxoutlookintl/AppManifest_OutlookDesktop_DisplayName": [
+      "@{microsoft.windowscommunicationsapps_16005.14326.20544.0_x64__8wekyb3d8bbwe?ms-resource://microsoft.windowscommunicationsapps/hxoutlookintl/AppManifest_OutlookDesktop_DisplayName}"
+    ],
+    "ms-resource:LensSDK/Resources/AppStoreName": [
+      "@{Microsoft.WindowsCamera_2022.2110.0.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsCamera/LensSDK/Resources/AppStoreName}"
+    ],
+    "ms-resource:StartMenuExperienceHost/PkgDisplayName": [
+      "Start"
+    ],
+    "Microsoft Store": [
+      "Microsoft Store"
+    ],
+    "Windows Web Experience Pack": [
+      "Windows Web Experience Pack"
+    ],
+    "HP Programmable Key": [
+      "HP Programmable Key"
+    ],
+    "ms-resource:PackageDisplayName": [
+      "@{Microsoft.SecHealthUI_1000.22000.1.0_neutral__8wekyb3d8bbwe?ms-resource://Microsoft.SecHealthUI/resources/PackageDisplayName}",
+      "Take a Test",
+      "Work or school account",
+      "Work or school account"
+    ],
+    "Intel® Optane™ Memory and Storage Management": [
+      "Intel® Optane™ Memory and Storage Management"
+    ]
+  },
+  "AuthorizedExes": {
+    "%ProgramFiles(x86)%\\Windows Media Player\\wmplayer.exe": [
+      "Windows Media Player x86 (UDP-Out)",
+      "Windows Media Player x86 (TCP-Out)"
+    ],
+    "%SystemRoot%\\system32\\omadmclient.exe": [
+      "Windows Device Management Sync Client (TCP out)"
+    ],
+    "System": [
+      "Core Networking - Packet Too Big (ICMPv6-Out)",
+      "Core Networking - Parameter Problem (ICMPv6-Out)",
+      "File and Printer Sharing (Echo Request - ICMPv4-Out)",
+      "File and Printer Sharing (SMB-Out)",
+      "Core Networking - Router Solicitation (ICMPv6-Out)",
+      "Core Networking - Multicast Listener Report v2 (ICMPv6-Out)",
+      "Core Networking - Multicast Listener Done (ICMPv6-Out)",
+      "File and Printer Sharing (NB-Session-Out)",
+      "File and Printer Sharing (Echo Request - ICMPv6-Out)",
+      "Core Networking - Router Advertisement (ICMPv6-Out)",
+      "Core Networking - Internet Group Management Protocol (IGMP-Out)",
+      "Network Discovery (NB-Datagram-Out)",
+      "Core Networking - Neighbor Discovery Advertisement (ICMPv6-Out)",
+      "Core Networking - Multicast Listener Query (ICMPv6-Out)",
+      "Core Networking - Time Exceeded (ICMPv6-Out)",
+      "Core Networking - Multicast Listener Report (ICMPv6-Out)",
+      "File and Printer Sharing (NB-Datagram-Out)",
+      "WFD Driver-only (TCP-Out)",
+      "Core Networking - Neighbor Discovery Solicitation (ICMPv6-Out)",
+      "Core Networking - IPv6 (IPv6-Out)",
+      "WFD Driver-only (UDP-Out)",
+      "File and Printer Sharing (NB-Name-Out)",
+      "Network Discovery (NB-Name-Out)",
+      "Windows Media Player Network Sharing Service (UPnP-Out)",
+      "Windows Media Player Network Sharing Service (HTTP-Streaming-Out)"
+    ],
+    "%SystemRoot%\\system32\\deviceenroller.exe": [
+      "Windows Device Management Device Enroller (TCP out)"
+    ],
+    "%SystemRoot%\\system32\\proximityuxhost.exe": [
+      "Proximity sharing over TCP (TCP sharing-Out)"
+    ],
+    "%SystemRoot%\\system32\\mdeserver.exe": [
+      "Cast to Device streaming server (RTP-Streaming-Out)"
+    ],
+    "%SystemRoot%\\system32\\dmcertinst.exe": [
+      "Windows Device Management Certificate Installer (TCP out)"
+    ],
+    "%PROGRAMFILES%\\Windows Media Player\\wmpnetwk.exe": [
+      "Windows Media Player Network Sharing Service (UDP-Out)",
+      "Windows Media Player Network Sharing Service (TCP-Out)"
+    ],
+    "%PROGRAMFILES%\\Windows Media Player\\wmplayer.exe": [
+      "Windows Media Player Network Sharing Service (Streaming-TCP-Out)",
+      "Windows Media Player Network Sharing Service (Streaming-UDP-Out)",
+      "Windows Media Player (UDP-Out)",
+      "Windows Media Player (TCP-Out)"
+    ],
+    "%systemroot%\\system32\\WUDFHost.exe": [
+      "Wireless Display (TCP-Out)",
+      "Wireless Display (UDP-Out)"
+    ],
+    "C:\\Program Files\\WindowsApps\\Microsoft.SkypeApp_15.107.3215.0_x64__kzf8qxf38zg5c\\Skype\\Skype.exe": [
+      "Skype",
+      "Skype"
+    ]
+  },
+  "UnkonwnAppsRules": [
+    "MSN Weather",
+    "Movies & TV",
+    "Xbox TCUI",
+    "Xbox",
+    "Groove Music",
+    "Microsoft Edge",
+    "@{Microsoft.Windows.Search_1.16.0.22000_neutral_neutral_cw5n1h2txyewy?ms-resource://Microsoft.Windows.Search/resources/PackageDisplayName}",
+    "@{Microsoft.Windows.Search_1.16.0.22000_neutral_neutral_cw5n1h2txyewy?ms-resource://Microsoft.Windows.Search/resources/PackageDisplayName}"
+  ],
+  "LocalSubnetRules": [
+    "Network Discovery (SSDP-Out)",
+    "Network Discovery (WSD Events-Out)",
+    "File and Printer Sharing (SMB-Out)",
+    "Network Discovery (UPnP-Out)",
+    "WFD ASP Coordination Protocol (UDP-Out)",
+    "File and Printer Sharing (NB-Session-Out)",
+    "Network Discovery (Pub WSD-Out)",
+    "Network Discovery (NB-Datagram-Out)",
+    "Microsoft Media Foundation Network Source OUT [TCP ALL]",
+    "Network Discovery (LLMNR-UDP-Out)",
+    "File and Printer Sharing (NB-Datagram-Out)",
+    "mDNS (UDP-Out)",
+    "Network Discovery (WSD EventsSecure-Out)",
+    "File and Printer Sharing (NB-Name-Out)",
+    "Network Discovery (WSD-Out)",
+    "File and Printer Sharing (LLMNR-UDP-Out)",
+    "Network Discovery (UPnPHost-Out)",
+    "Network Discovery (NB-Name-Out)",
+    "Windows Media Player Network Sharing Service (Streaming-TCP-Out)",
+    "Cast to Device streaming server (RTP-Streaming-Out)",
+    "Windows Media Player Network Sharing Service (UPnPHost-Out)",
+    "Windows Media Player Network Sharing Service (SSDP-Out)",
+    "Windows Media Player Network Sharing Service (qWave-TCP-Out)",
+    "Windows Media Player Network Sharing Service (UPnP-Out)",
+    "Windows Media Player Network Sharing Service (HTTP-Streaming-Out)",
+    "Windows Media Player Network Sharing Service (UDP-Out)",
+    "Windows Media Player Network Sharing Service (qWave-UDP-Out)",
+    "Windows Media Player Network Sharing Service (TCP-Out)",
+    "Windows Media Player Network Sharing Service (Streaming-UDP-Out)"
+  ],
+  "AllRules": [
+    "Network Discovery (SSDP-Out)",
+    "Network Discovery (WSD Events-Out)",
+    "Core Networking - Packet Too Big (ICMPv6-Out)",
+    "Core Networking - Parameter Problem (ICMPv6-Out)",
+    "File and Printer Sharing (Echo Request - ICMPv4-Out)",
+    "File and Printer Sharing (SMB-Out)",
+    "Core Networking - Router Solicitation (ICMPv6-Out)",
+    "Network Discovery (UPnP-Out)",
+    "Core Networking - Multicast Listener Report v2 (ICMPv6-Out)",
+    "Windows Device Management Enrollment Service (TCP out)",
+    "Windows Device Management Certificate Installer (TCP out)",
+    "Core Networking - Multicast Listener Done (ICMPv6-Out)",
+    "Core Networking - Teredo (UDP-Out)",
+    "WFD ASP Coordination Protocol (UDP-Out)",
+    "File and Printer Sharing (NB-Session-Out)",
+    "Recommended Troubleshooting Client (HTTP/HTTPS Out)",
+    "Network Discovery (Pub WSD-Out)",
+    "Wireless Display (TCP-Out)",
+    "Wireless Display (UDP-Out)",
+    "File and Printer Sharing (Echo Request - ICMPv6-Out)",
+    "Core Networking - Router Advertisement (ICMPv6-Out)",
+    "Core Networking - IPHTTPS (TCP-Out)",
+    "Core Networking - Internet Group Management Protocol (IGMP-Out)",
+    "Core Networking - DNS (UDP-Out)",
+    "Network Discovery (NB-Datagram-Out)",
+    "Microsoft Media Foundation Network Source OUT [TCP ALL]",
+    "Core Networking - Neighbor Discovery Advertisement (ICMPv6-Out)",
+    "Windows Device Management Device Enroller (TCP out)",
+    "Core Networking - Multicast Listener Query (ICMPv6-Out)",
+    "Core Networking - Time Exceeded (ICMPv6-Out)",
+    "Network Discovery (LLMNR-UDP-Out)",
+    "Core Networking - Multicast Listener Report (ICMPv6-Out)",
+    "Proximity sharing over TCP (TCP sharing-Out)",
+    "Core Networking - Dynamic Host Configuration Protocol (DHCP-Out)",
+    "File and Printer Sharing (NB-Datagram-Out)",
+    "WFD Driver-only (TCP-Out)",
+    "Connected User Experiences and Telemetry",
+    "mDNS (UDP-Out)",
+    "Core Networking - Neighbor Discovery Solicitation (ICMPv6-Out)",
+    "Core Networking - IPv6 (IPv6-Out)",
+    "WFD Driver-only (UDP-Out)",
+    "Network Discovery (WSD EventsSecure-Out)",
+    "File and Printer Sharing (NB-Name-Out)",
+    "Network Discovery (WSD-Out)",
+    "Windows Device Management Sync Client (TCP out)",
+    "Core Networking - Dynamic Host Configuration Protocol for IPv6(DHCPV6-Out)",
+    "File and Printer Sharing (LLMNR-UDP-Out)",
+    "Network Discovery (UPnPHost-Out)",
+    "Network Discovery (NB-Name-Out)",
+    "Windows Media Player Network Sharing Service (Streaming-TCP-Out)",
+    "Cast to Device streaming server (RTP-Streaming-Out)",
+    "Windows Media Player Network Sharing Service (UPnPHost-Out)",
+    "Cloud Identity (TCP-Out)",
+    "Windows Media Player Network Sharing Service (SSDP-Out)",
+    "Windows Media Player Network Sharing Service (qWave-TCP-Out)",
+    "Windows Media Player Network Sharing Service (UPnP-Out)",
+    "Windows Media Player Network Sharing Service (HTTP-Streaming-Out)",
+    "Windows Media Player Network Sharing Service (UDP-Out)",
+    "Windows Media Player Network Sharing Service (qWave-UDP-Out)",
+    "Windows Media Player Network Sharing Service (TCP-Out)",
+    "Windows Media Player x86 (UDP-Out)",
+    "Windows Media Player x86 (TCP-Out)",
+    "Windows Media Player Network Sharing Service (Streaming-UDP-Out)",
+    "Windows Media Player (UDP-Out)",
+    "Windows Media Player (TCP-Out)",
+    "Hyper-V - WMI (TCP-Out)",
+    "Hyper-V Management Clients - WMI (TCP-Out)",
+    "HP QuickDrop",
+    "Mixed Reality Portal",
+    "Xbox Game Bar Plugin",
+    "HP Privacy Settings",
+    "HP Programmable Key",
+    "HP QuickDrop",
+    "HP Support Assistant",
+    "myHP",
+    "@{AppUp.IntelGraphicsExperience_1.100.3370.0_x64__8j3eq9eme6ctt?ms-resource://AppUp.IntelGraphicsExperience/Resources/System_Item_Title_IntelGraphicsControlPanel}",
+    "Intel(R) Management and Security Status",
+    "Intel® Optane™ Memory and Storage Management",
+    "MSN Weather",
+    "@{Microsoft.DesktopAppInstaller_1.16.12986.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.DesktopAppInstaller/Resources/appDisplayName}",
+    "@{Microsoft.MSPaint_6.2105.4017.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.MSPaint/resources/AppName}",
+    "OneNote for Windows 10",
+    "@{Microsoft.People_10.2105.4.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.People/Resources/AppStoreName}",
+    "@{Microsoft.SecHealthUI_1000.22000.1.0_neutral__8wekyb3d8bbwe?ms-resource://Microsoft.SecHealthUI/resources/PackageDisplayName}",
+    "@{Microsoft.StorePurchaseApp_12109.1001.10.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.StorePurchaseApp/Resources/DisplayTitle}",
+    "@{Microsoft.Todos_2.57.43142.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.Todos/Resources/app_name_ms_todo}",
+    "Tile",
+    "Mixed Reality Portal",
+    "@{Microsoft.GetHelp_10.2109.42921.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.GetHelp/Resources/appDisplayName}",
+    "@{Microsoft.MicrosoftStickyNotes_4.1.9.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.MicrosoftStickyNotes/Resources/StickyNotesStoreAppName}",
+    "Microsoft Solitaire Collection",
+    "@{Microsoft.Microsoft3DViewer_7.2107.7012.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.Microsoft3DViewer/Common.View.UWP/Resources/StoreAppName}",
+    "Office",
+    "Microsoft Whiteboard",
+    "@{Microsoft.WindowsCalculator_11.2109.9.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsCalculator/Resources/AppStoreName}",
+    "@{Microsoft.WindowsFeedbackHub_1.2111.3131.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsFeedbackHub/Resources/AppStoreName}",
+    "@{Microsoft.WindowsMaps_10.2104.2.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsMaps/Resources/AppStoreName}",
+    "Movies & TV",
+    "Windows Terminal",
+    "Xbox TCUI",
+    "Xbox",
+    "Xbox Game Bar Plugin",
+    "Xbox Game Bar",
+    "Groove Music",
+    "Skype",
+    "Narrator",
+    "NcsiUwpApp",
+    "Windows Shell Experience",
+    "Email and accounts",
+    "Windows Default Lock Screen",
+    "Take a Test",
+    "Xbox Game UI",
+    "Microsoft family features",
+    "Desktop App Web Viewer",
+    "Windows Defender SmartScreen",
+    "@{Microsoft.WindowsAlarms_11.2109.1.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsAlarms/Resources/AppStoreName}",
+    "Microsoft Store",
+    "@{Microsoft.WindowsCamera_2022.2110.0.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.WindowsCamera/LensSDK/Resources/AppStoreName}",
+    "@{Microsoft.Windows.Photos_2021.21100.20007.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.Windows.Photos/Resources/AppStoreName}",
+    "@{microsoft.windowscommunicationsapps_16005.14326.20544.0_x64__8wekyb3d8bbwe?ms-resource://microsoft.windowscommunicationsapps/hxoutlookintl/AppManifest_OutlookDesktop_DisplayName}",
+    "Windows Web Experience Pack",
+    "@{Microsoft.Getstarted_10.7.42522.0_x64__8wekyb3d8bbwe?ms-resource://Microsoft.Getstarted/Resources/AppStoreName}",
+    "Microsoft Content",
+    "Microsoft Edge",
+    "Cortana",
+    "@{Microsoft.Windows.Search_1.16.0.22000_neutral_neutral_cw5n1h2txyewy?ms-resource://Microsoft.Windows.Search/resources/PackageDisplayName}",
+    "Start",
+    "Windows Feature Experience Pack",
+    "Captive Portal Flow",
+    "Work or school account",
+    "Your account",
+    "@{Microsoft.Windows.Search_1.16.0.22000_neutral_neutral_cw5n1h2txyewy?ms-resource://Microsoft.Windows.Search/resources/PackageDisplayName}",
+    "Captive Portal Flow",
+    "Work or school account",
+    "Skype",
+    "Skype"
+  ]
+}

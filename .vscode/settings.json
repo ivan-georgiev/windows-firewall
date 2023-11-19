@@ -1,0 +1,33 @@
+{
+  // Editor settings
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  // File settings
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+  "files.encoding": "utf8bom",
+  // PowerShell extension settings
+  "powershell.codeFormatting.preset": "OTBS",
+  "powershell.codeFormatting.alignPropertyValuePairs": true,
+  "powershell.codeFormatting.whitespaceInsideBrace": true,
+  "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+  "powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+  "powershell.codeFormatting.whitespaceAroundOperator": true,
+  "powershell.codeFormatting.whitespaceAfterSeparator": true,
+  "powershell.codeFormatting.useCorrectCasing": true,
+  "powershell.codeFormatting.addWhitespaceAroundPipe": true,
+  "powershell.scriptAnalysis.enable": false,
+  "[markdown]": {
+    //Enabling trailing whitespaces breaks hard line breaks in markdown. For that reason it is disabled.
+    "files.trimTrailingWhitespace": false
+  },
+  "[powershell]": {
+    "editor.rulers": [
+      120
+    ]
+  }
+}
