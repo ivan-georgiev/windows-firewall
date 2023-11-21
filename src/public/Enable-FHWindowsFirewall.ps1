@@ -16,7 +16,6 @@
   $HashArguments = @{
     DefaultInboundAction            = "Block"
     DefaultOutboundAction           = "Block"
-    AllowUnicastResponseToMulticast = "True"
     LogFileName                     = "$env:SystemRoot\System32\LogFiles\Firewall\pfirewall.log"
     LogBlocked                      = "True"
   }

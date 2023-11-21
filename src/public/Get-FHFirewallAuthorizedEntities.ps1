@@ -40,7 +40,7 @@ function Get-FHFirewallAuthorizedEntities {
   Write-Verbose -Message "Get Enabled Firewall Outbound Rules"
   $outboundRules = Get-NetFirewallRule -Direction Outbound -Enabled True -ErrorAction Stop
   # filter rules affecting selected network profile
-  $outboundRules = $outboundRules | Where-Object -FilterScript { $_.Profile.ToString().Contains($profileName) -or $_.Profile.ToString() -eq "Any" }
+  $outboundRules = $outboundRules | Where-Object -FilterScript {$_.Profile.ToString().Contains($profileName) -or $_.Profile.ToString() -eq "Any"}
 
   # loop all rules
   $rulesCount = $($outboundRules | Measure-Object).Count
