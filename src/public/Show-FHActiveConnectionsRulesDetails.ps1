@@ -1,7 +1,10 @@
 ﻿
 function Show-FHActiveConnectionsRulesDetails {
   [CmdletBinding()]
-  param()
+  param(
+    [Parameter()]
+    [switch] $UseBaselineReportFile
+  )
 
   $activeProfile = Get-NetFirewallSetting -PolicyStore ActiveStore | Select-Object -ExpandProperty ActiveProfile
   Write-Verbose -Message "Active network profile: [$activeProfile]"
@@ -31,9 +34,18 @@ function Show-FHActiveConnectionsRulesDetails {
   }
 
   # get firewall details
-  try {
-    $entities = Get-Content -Path "Baseline-$activeProfile-latest.json" -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
-  } catch {
+  $entities = $null
+  if ($UseBaselineReportFile.IsPresent) {
+    try {
+      $entities = Get-Content -Path "Baseline-$activeProfile-latest.json" -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
+    } catch [System.Management.Automation.ItemNotFoundException] {
+      Write-Warning -Message "Error getting baseline file content [$($_.Exception.Message)]. Generate new baseline report."
+      $null = Create-FHBaselineReport -NetworkProfileName $activeProfile -ErrorAction Stop
+      # get baseline content
+      $entities = Get-Content -Path "Baseline-$activeProfile-latest.json" -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
+    }
+  }
+  if ($null -eq $entities) {
     Write-Verbose -Message "Baseline file not detected. Get enitities dynamically"
     $entities = Get-FHFirewallAuthorizedEntities -NetworkProfileName $activeProfile -ErrorAction Stop -Verbose
   }
@@ -87,6 +99,7 @@ function Show-FHActiveConnectionsRulesDetails {
       } else {
         Write-Verbose -Message "-- No exe rules found for exe [$exePath]"
       }
+
       Write-Verbose -Message "`n`n"
     } catch {
       Write-Error -Message "Exception [$($_.Message)] during processing connection [$conn]" -ErrorAction Continue
@@ -105,7 +118,21 @@ function Show-FHActiveConnectionsRulesDetails {
     } else {
       Write-Verbose -Message "-- No exe rules found for exe [$blockedExe]"
     }
-    Write-Verbose -Message "-- Destination details: [$($blockedProgramsHashmap[$blockedExe].BlockedIps | ConvertTo-Json -Depth 2)]"
+    Write-Verbose -Message "-- Destination details: [$($blockedProgramsHashmap[$blockedExe].BlockedIps.BlockedDestinationIp -join ", ")]"
+    # check if exe is part of a service, use service hashmap to improve speed
+    $relatedService = $servicesHashmap[$blockedExe]
+    if ($relatedService) {
+      $exactService = Get-WmiObject -Class Win32_Service -Filter "ProcessId='$($blockedProgramsHashmap[$blockedExe].FullProcessDetails.Id.ToString())'" -ErrorAction Stop | Select-Object -Property Name, DisplayName, Description, PathName
+      Write-Verbose -Message "-- Related service details: [$exactService]"
+      # lookup rules related to this service
+      $rules = $entities.AuthorizedServices[$exactService.Name].Rules
+      if ($rules) {
+        Write-Verbose -Message "-- Related service rules details: [$rules]"
+      } else {
+        Write-Verbose -Message "-- No firewall rules found for service [$($exactService.Name)]."
+      }
+    }
+
     Write-Verbose -Message "`n"
   }
 

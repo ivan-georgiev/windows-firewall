@@ -69,7 +69,50 @@
         RemoteAddress = "Any"
         RemotePort    = "Any"
         Program       = "C:\Program Files\PowerShell\7\pwsh.exe"
+      },
+      @{
+        DisplayName   = "FH-SecurityUpdateService"
+        Description   = "Allow HP Security Update Service"
+        RemoteAddress = "Any"
+        RemotePort    = "Any"
+        Service       = "SecurityUpdateService"
+      },
+      @{
+        DisplayName   = "FH-BrHostSvr"
+        Description   = "Allow HP Sure Click"
+        RemoteAddress = "Any"
+        RemotePort    = "Any"
+        Program       = "C:\Program Files\HP\Sure Click\servers\BrHostSvr.exe"
+      },
+      @{
+        DisplayName   = "FH-Git1"
+        Description   = "Allow Git exe"
+        RemoteAddress = "Any"
+        RemotePort    = "Any"
+        Program       = "C:\Program Files\Git\cmd\git.exe"
+      },
+      @{
+        DisplayName   = "FH-Git2"
+        Description   = "Allow Git exe"
+        RemoteAddress = "Any"
+        RemotePort    = "Any"
+        Program       = "C:\Program Files\Git\mingw64\bin\git.exe"
+      },
+      @{
+        DisplayName   = "FH-Git3"
+        Description   = "Allow Git exe"
+        RemoteAddress = "Any"
+        RemotePort    = "Any"
+        Program       = "C:\Program Files\Git\mingw64\libexec\git-core\git.exe"
+      },
+      @{
+        DisplayName   = "FH-Git4"
+        Description   = "Allow git-remote-https.exe"
+        RemoteAddress = "Any"
+        RemotePort    = "Any"
+        Program       = "C:\Program Files\Git\mingw64\libexec\git-core\git-remote-https.exe"
       }
+
     )
   }
 }

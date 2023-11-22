@@ -7,6 +7,7 @@ function Get-FHFirewallTodayLogDetails {
 
   # result
   $blockedProgramsHashmap = @{}
+  $exeResolutionErrors = $false
 
   # process log file if present
   try {
@@ -26,7 +27,9 @@ function Get-FHFirewallTodayLogDetails {
       $proccessHashmap.Add($processId, $p)
     }
 
+    $lineNumber = -1
     foreach ($line in $firewallLog) {
+      $lineNumber += 1
       # skip old rows, not from today
       if (-not $line.Contains("$today ")) {
         continue
@@ -48,10 +51,11 @@ function Get-FHFirewallTodayLogDetails {
 
       # resolve exe from pid
       $process = $proccessHashmap[$procId]
-      if ($process) {
+      if ($process -and $process.Path) {
         $processesExe = $process.Path
       } else {
-        Write-Warning -Message "Cannot resolve PID from firewall log"
+        $exeResolutionErrors = $true
+        $processesExe = $procId
       }
 
       # init hashmap item if not there
@@ -63,14 +67,24 @@ function Get-FHFirewallTodayLogDetails {
       }
 
       # add IP details
-      [void] $blockedProgramsHashmap[$processesExe].BlockedIps.Add( [PSCustomObject]@{
-          BlockedDestinationIp = $dstIp
-          Protocol             = $protocol
-        })
+      $details = [PSCustomObject]@{
+        BlockedDestinationIp = $dstIp
+        Protocol             = $protocol
+      }
+      if ($blockedProgramsHashmap[$processesExe].BlockedIps.BlockedDestinationIp -notcontains $details.BlockedDestinationIp) {
+        [void] $blockedProgramsHashmap[$processesExe].BlockedIps.Add( $details )
+      }
     }
 
-  } catch {
+  } catch [System.Management.Automation.ItemNotFoundException] {
     Write-Warning -Message "Cannot get firewall log file content"
+  } catch {
+    Write-Error -Message "Error on line [$lineNumber]: [$line]" -ErrorAction Continue
+    throw
+  }
+
+  if ($exeResolutionErrors) {
+    Write-Warning -Message "Cannot resolve PID from firewall log for some exes, so PID is used instead"
   }
   # return
   $blockedProgramsHashmap
