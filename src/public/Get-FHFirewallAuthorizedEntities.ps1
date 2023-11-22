@@ -37,24 +37,30 @@ function Get-FHFirewallAuthorizedEntities {
       })
   }
 
+  # get current user SID
+  $currentUserSid = (Get-LocalUser -Name $env:USERNAME -ErrorAction Stop | Select-Object -ExpandProperty SID -ErrorAction Stop).Value
+
   Write-Verbose -Message "Get Enabled Firewall Outbound Rules"
-  $outboundRules = Get-NetFirewallRule -Direction Outbound -Enabled True -ErrorAction Stop
+  $outboundRules = Get-NetFirewallRule -Direction Outbound -Enabled True -ErrorAction Stop -PolicyStore ActiveStore
   # filter rules affecting selected network profile
-  $outboundRules = $outboundRules | Where-Object -FilterScript {$_.Profile.ToString().Contains($profileName) -or $_.Profile.ToString() -eq "Any"}
+  $outboundRules = $outboundRules | Where-Object -FilterScript { $_.Profile.ToString().Contains($profileName) -or $_.Profile.ToString() -eq "Any" }
+  # remove rules not owned by current user or Any
+  $outboundRules = $outboundRules | Where-Object -FilterScript { -not $_.Owner -or $_.Owner -eq $currentUserSid }
+
 
   # loop all rules
   $rulesCount = $($outboundRules | Measure-Object).Count
   Write-Verbose -Message "Found [$rulesCount] Enabled outbound rules."
   for ($i = 0; $i -lt ($rulesCount); $i++) {
     $rule = $outboundRules[$i]
-    Write-Verbose -Message "Processing $i/$rulesCount - [$($rule.Name) /$($rule.DisplayName)/]"
+    Write-Verbose -Message "Processing $i/$rulesCount - [$($rule.DisplayName) /$($rule.Name)/]"
 
     # add to all rules
     $allRules.Add($rule.Name, $rule.DisplayName)
 
     # get address filter and ignore local subnet
     $addressFilter = $rule | Get-NetFirewallAddressFilter -ErrorAction Stop
-    if ($addressFilter.RemoteIP -eq "LocalSubnet" -and $addressFilter.RemoteAddress -eq "LocalSubnet") {
+    if ($addressFilter.RemoteIP -like "LocalSubnet*" -and $addressFilter.RemoteAddress -like "LocalSubnet*") {
       Write-Verbose -Message "Local Subnet target rule. Continue."
       [void] $localSubnetRules.Add($rule.Name)
       continue
@@ -116,7 +122,7 @@ function Get-FHFirewallAuthorizedEntities {
 
       if ($applicationFilter.Program -eq "Any") {
         Write-Verbose -Message "Any exe. Continue."
-        [void] $anyExeRules.Add($rule.Name)
+        [void] $anyExeRules.Add(@($rule.Name, $addressFilter.RemoteAddress))
         continue
       }
       # some rules use CMD variables, run cmd to resolve them

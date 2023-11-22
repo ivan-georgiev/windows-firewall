@@ -19,7 +19,7 @@ function Compare-FHWithBaselineReport {
     Write-Verbose -Message "Active network profile: [$activeProfile]"
 
     Write-Verbose -Message "Generate CurrentState report for active profile started"
-    $entities = Get-FirewallAuthorizedEntities -NetworkProfileName $activeProfile -ErrorAction Stop -Verbose
+    $entities = Get-FHFirewallAuthorizedEntities -NetworkProfileName $activeProfile -ErrorAction Stop -Verbose
     Write-Verbose -Message "Generate CurrentState report for active profile completed"
   }
 
@@ -39,7 +39,7 @@ function Compare-FHWithBaselineReport {
   $baselineEntities = Get-Content -Path $baselineFile -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
 
   # generate rules report
-  $rulesDiff = Compare-ObjectWithNullSupport -ReferenceObject $baselineEntities.AllRules.GetEnumerator().Name -DifferenceObject $entities.AllRules.GetEnumerator().Name -ErrorAction Stop
+  $rulesDiff = Compare-FHObjectWithNullSupport -ReferenceObject $baselineEntities.AllRules.GetEnumerator().Name -DifferenceObject $entities.AllRules.GetEnumerator().Name -ErrorAction Stop
   if ($rulesDiff.New) {
     Write-Verbose -Message "`n=== New Firewall Rules:"
     foreach ($r in $rulesDiff.New) {
@@ -53,7 +53,7 @@ function Compare-FHWithBaselineReport {
     }
   }
 
-  $servicesDiff = Compare-ObjectWithNullSupport -ReferenceObject $baselineEntities.AuthorizedServices.Values.Details.DisplayName -DifferenceObject $entities.AuthorizedServices.Values.Details.DisplayName -ErrorAction Stop
+  $servicesDiff = Compare-FHObjectWithNullSupport -ReferenceObject $baselineEntities.AuthorizedServices.Values.Details.DisplayName -DifferenceObject $entities.AuthorizedServices.Values.Details.DisplayName -ErrorAction Stop
   if ($servicesDiff.New) {
     Write-Verbose -Message "`n=== New Firewall authorized Services:`n$($servicesDiff.New -join "`n") `n`n"
   }
@@ -61,7 +61,7 @@ function Compare-FHWithBaselineReport {
     Write-Verbose -Message "`n=== Deleted Firewall rules affecting Services:`n$($servicesDiff.Deleted -join "`n") `n`n"
   }
 
-  $exesDiff = Compare-ObjectWithNullSupport -ReferenceObject $baselineEntities.AuthorizedExes.GetEnumerator().Name -DifferenceObject $entities.AuthorizedExes.GetEnumerator().Name -ErrorAction Stop
+  $exesDiff = Compare-FHObjectWithNullSupport -ReferenceObject $baselineEntities.AuthorizedExes.GetEnumerator().Name -DifferenceObject $entities.AuthorizedExes.GetEnumerator().Name -ErrorAction Stop
   if ($exesDiff.New) {
     Write-Verbose -Message "`n=== New Firewall authorized Exes:`n$($exesDiff.New -join "`n") `n`n"
   }
@@ -69,7 +69,7 @@ function Compare-FHWithBaselineReport {
     Write-Verbose -Message "`n=== Deleted Firewall rules affecting Exes:`n$($exesDiff.Deleted -join "`n") `n`n"
   }
 
-  $appsDiff = Compare-ObjectWithNullSupport -ReferenceObject $baselineEntities.AuthorizedApps.GetEnumerator().Name -DifferenceObject $entities.AuthorizedApps.GetEnumerator().Name -ErrorAction Stop
+  $appsDiff = Compare-FHObjectWithNullSupport -ReferenceObject $baselineEntities.AuthorizedApps.GetEnumerator().Name -DifferenceObject $entities.AuthorizedApps.GetEnumerator().Name -ErrorAction Stop
   if ($appsDiff.New) {
     Write-Verbose -Message "`n=== New Firewall authorized Apps:`n$($appsDiff.New -join "`n") `n`n"
   }

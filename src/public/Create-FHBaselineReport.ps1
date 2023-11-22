@@ -24,7 +24,7 @@
   $entities | ConvertTo-Json -Depth 5 | Out-File -FilePath $baselineFilename -Encoding utf8 -ErrorAction Stop -Confirm:$false
 
   # save result to latest, not just timestamp
-  Copy-Item -Path $baselineFilename -Destination "Baseline-$profileName.json" -Force -Confirm:$false -ErrorAction Stop
+  Copy-Item -Path $baselineFilename -Destination "Baseline-$profileName-latest.json" -Force -Confirm:$false -ErrorAction Stop
 
   # result
   $baselineFilename
