@@ -31,8 +31,9 @@
     "Program": "C:\\Program Files\\Git\\mingw64\\libexec\\git-core\\git-remote-https.exe"
   },
   {
-    "Description": "Allow HP Security Update Service",
-    "Service": "SecurityUpdateService"
+    "Service": "SecurityUpdateService",
+    "Comment": "Connects installed HP security applications to the online Controller service.",
+    "Description": "Allow 'HP Security Update Service' service"
   },
   {
     "Comment": "Maintains date and time synchronization on all clients and servers in the network. If this service is stopped, date and time synchronization will be unavailable. If this service is disabled, any services that explicitly depend on it will fail to start. ",
@@ -51,5 +52,10 @@
   },
   {
     "Program": "c:\\windows\\system32\\taskhostw.exe"
+  },
+  {
+    "Comment": "Performs content delivery optimization tasks ",
+    "Service": "DoSvc",
+    "Description": "Allow 'Delivery Optimization' service"
   }
 ]

@@ -3,8 +3,7 @@ $ErrorActionPreference = "Stop"
 
 . ./_functions.ps1
 
-
-Show-FHStateSummary -ErrorAction Stop -Verbose
+#Show-FHStateSummary -ErrorAction Stop -Verbose
 
 #Create-FHBaselineReport -ErrorAction Stop -Verbose
 #Map-FHRunningConnectionsWithFirewallRules -ErrorAction Stop -Verbose
@@ -19,4 +18,4 @@ Show-FHStateSummary -ErrorAction Stop -Verbose
 #$config = Get-FHRulesToCreateConfig -Verbose  -ErrorAction Stop
 #Create-FHFirewallRules -RulesToCreateConfig $config -DeleteIfExists:$false -ErrorAction Stop -Verbose
 
-#Create-FHScanReport -ErrorAction Stop -Verbose
+Create-FHScanReport -ErrorAction Stop -Verbose

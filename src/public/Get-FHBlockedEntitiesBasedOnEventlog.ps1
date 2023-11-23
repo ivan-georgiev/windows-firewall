@@ -146,6 +146,8 @@
   # for exes part of a service, add all details and remove from other group
   foreach ($bs in $blockedServices) {
     $bs["ExecutableDetails"] = $blockedProgramsHashmap[$bs.ExePath]
+  }
+  foreach ($bs in $blockedServices) {
     $blockedProgramsHashmap.Remove($bs.ExePath)
   }
 

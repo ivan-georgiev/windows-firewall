@@ -14,12 +14,12 @@
   $blockedEntities = Get-FHBlockedEntitiesBasedOnEventlog -EventFilterStartTime $EventFilterStartTime -ErrorAction Stop -Verbose
 
   Write-Verbose -Message "Creating config for blocked Services"
-  foreach ($s in $blockedEntities.BlockedServicesList) {
-    foreach ($service in $s.Service) {
+  foreach ($item in $blockedEntities.BlockedServicesList) {
+    foreach ($service in $item.Service) {
       [void] $config.add(@{
           Service     = $service.Name
           Description = "Allow '$($service.DisplayName)' service"
-          Comment     = "Blocked IPs: $($s.BlockedIPs). $($service.Description) "
+          Comment     = "Connections count: $($item.ExecutableDetails.Counter). Blocked IPs: $($item.BlockedIPs). $($service.Description) "
         })
     }
   }
@@ -27,10 +27,10 @@
   Write-Verbose -Message "Created [$serviceRulesCount] rules for Services"
 
   Write-Verbose -Message "Creating config for blocked Programs"
-  foreach ($s in $r.BlockedProgramsList) {
+  foreach ($item in $blockedEntities.BlockedProgramsList) {
     [void] $config.add(@{
-        Program = $s.ProcessesExe
-        Comment = "Blocked IPs: $($s.BlockedIps -join ', ')"
+        Program = $item.ProcessesExe
+        Comment = "Connections count: $($item.Counter). Blocked IPs: $($item.BlockedIps -join ', ')"
       })
   }
   $programRulesCount = (($config | Measure-Object).Count - $serviceRulesCount)

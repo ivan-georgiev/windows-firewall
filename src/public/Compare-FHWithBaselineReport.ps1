@@ -43,7 +43,7 @@ function Compare-FHWithBaselineReport {
   if ($rulesDiff.New) {
     Write-Verbose -Message "`n=== New Firewall Rules:"
     foreach ($r in $rulesDiff.New) {
-      Write-Verbose -Message "$($baselineEntities.AllRules[$r]) / $r /"
+      Write-Verbose -Message "$($baselineEntities.AllRules[$r]) /$r/"
     }
   }
   if ($rulesDiff.Deleted) {

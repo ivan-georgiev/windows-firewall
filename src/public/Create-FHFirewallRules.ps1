@@ -4,15 +4,36 @@ function Create-FHFirewallRules {
   param(
 
     [Parameter()]
+    [ValidateNotNullOrEmpty()]
     [PSCustomObject] $RulesToCreateConfig,
 
     [Parameter()]
-    [switch] $DeleteIfExists
+    [ValidateNotNull()]
+    [string] $AdditionalConfigFile,
+
+    [Parameter()]
+    [switch] $DeleteIfExists,
+
+    [Parameter()]
+    [switch] $GetConfig
   )
 
-  $commonParams = $RulesToCreateConfig.CommonParams
-  $rulesToCreate = $RulesToCreateConfig.Rules
+  # run get config cmdlet if swith is passed
+  if ($GetConfig.IsPresent) {
+    $params = @{}
+    if ($PSBoundParameters.ContainsKey('AdditionalConfigFile')) {
+      $params.Add('AdditionalConfigFile', $AdditionalConfigFile)
+    }
+    $config = Get-FHRulesToCreateConfig @params -Verbose -ErrorAction Stop
+    $commonParams = $config.CommonParams
+    $rulesToCreate = $config.Rules
+  } else {
+    # used passed objet
+    $commonParams = $RulesToCreateConfig.CommonParams
+    $rulesToCreate = $RulesToCreateConfig.Rules
+  }
 
+  Write-Verbose -Message "Found [$(($rulesToCreate | Measure-Object).Count)] rules"
   foreach ($ruleParams in $rulesToCreate) {
 
     [hashtable] $params = Merge-FHHashtables -HashtableA $commonParams -HashtableB $ruleParams -ErrorAction Stop
