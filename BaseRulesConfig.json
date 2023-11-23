@@ -1,0 +1,55 @@
+﻿[
+  {
+    "DisplayName": "FH-LocalNetwork",
+    "RemoteAddress": [
+      "LocalSubnet",
+      "DNS",
+      "DHCP",
+      "WINS",
+      "DefaultGateway",
+      "Intranet",
+      "PlayToDevice"
+    ],
+    "Description": "Allow All LocalNetwork Traffic"
+  },
+  {
+    "Program": "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+  },
+  {
+    "Program": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+  },
+  {
+    "Program": "C:\\Program Files (x86)\\uTorrent\\uTorrent.exe"
+  },
+  {
+    "Program": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+  },
+  {
+    "Program": "C:\\Program Files\\Git\\usr\\bin\\ssh.exe"
+  },
+  {
+    "Program": "C:\\Program Files\\Git\\mingw64\\libexec\\git-core\\git-remote-https.exe"
+  },
+  {
+    "Description": "Allow HP Security Update Service",
+    "Service": "SecurityUpdateService"
+  },
+  {
+    "Comment": "Maintains date and time synchronization on all clients and servers in the network. If this service is stopped, date and time synchronization will be unavailable. If this service is disabled, any services that explicitly depend on it will fail to start. ",
+    "Service": "W32Time",
+    "Description": "Allow 'Windows Time' service"
+  },
+  {
+    "Comment": "Transfers files in the background using idle network bandwidth. If the service is disabled, then any applications that depend on BITS, such as Windows Update or MSN Explorer, will be unable to automatically download programs and other information. ",
+    "Service": "BITS",
+    "Description": "Allow 'Background Intelligent Transfer Service' service"
+  },
+  {
+    "Comment": "Provides infrastructure support for the Microsoft Store.  This service is started on demand and if disabled then installations will not function properly. ",
+    "Service": "InstallService",
+    "Description": "Allow 'Microsoft Store Install Service' service"
+  },
+  {
+    "Program": "c:\\windows\\system32\\taskhostw.exe"
+  }
+]

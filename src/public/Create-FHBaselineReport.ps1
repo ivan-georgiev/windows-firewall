@@ -15,7 +15,7 @@
   Write-Verbose -Message "Network profile: [$profileName]"
 
   # result file
-  $baselineFilename = "Baseline-$profileName$(((Get-Date).ToUniversalTime()).ToString('yyyyMMdd-HHmmss')).json"
+  $baselineFilename = "Baseline-$profileName-$(((Get-Date).ToUniversalTime()).ToString('yyyyMMdd_HHmmss')).json"
 
   # generate rules report
   $entities = Get-FHFirewallAuthorizedEntities -NetworkProfileName $profileName -ErrorAction Stop -Verbose

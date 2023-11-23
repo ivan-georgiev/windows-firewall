@@ -16,8 +16,6 @@
   $HashArguments = @{
     DefaultInboundAction            = "Block"
     DefaultOutboundAction           = "Block"
-    LogFileName                     = "$env:SystemRoot\System32\LogFiles\Firewall\pfirewall.log"
-    LogBlocked                      = "True"
   }
   Set-NetFirewallProfile @HashArguments -ErrorAction Stop
 }
