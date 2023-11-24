@@ -64,6 +64,27 @@ function Create-FHFirewallRules {
       }
       Write-Verbose -Message "Creating rule [$($params.Name)]"
       New-NetFirewallRule @params -ErrorAction Stop
+
+      # https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/windows-firewall/configure#create-an-inbound-program-or-service-rule
+      # To use the Apply to this service or Apply to service with this service short name options, the service must be configured with a security identifier (SID) with a type of RESTRICTED or UNRESTRICTED.
+      # If the result is NONE, then a firewall rule cannot be applied to that service.
+      if ($params.Service) {
+        $output = & sc qsidtype $params.Service
+        if ($LASTEXITCODE -ne 0 -or -not $?) {
+          throw "Cannot identify Service SID type"
+        }
+        # example: SERVICE_SID_TYPE:  NONE
+        $lastRow = $output[-1]
+        Write-Verbose -Message "Service SID type info: [$lastRow]"
+        if ($output[-1].Contains("NONE")) {
+          Write-Verbose -Message "Update SID type to Unrestricted"
+          & sc sidtype $params.Service unrestricted
+          if ($LASTEXITCODE -ne 0 -or -not $?) {
+            throw "Cannot set Service SID type"
+          }
+        }
+        $params.DisplayName = "FH-$($params.Service)"
+      }
     } catch [Microsoft.Management.Infrastructure.CimException] {
       #$_.Exception.GetType().FullName
       if ("AlreadyExists" -eq $_.Exception.NativeErrorCode) {

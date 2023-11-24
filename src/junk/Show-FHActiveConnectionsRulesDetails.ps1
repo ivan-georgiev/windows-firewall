@@ -24,7 +24,7 @@ function Show-FHActiveConnectionsRulesDetails {
     $binaryRaw = $svc.BinaryPathName
     if ($binaryRaw) {
       $binary = (($binaryRaw.Trim('"')) -split ".exe")[0]
-      $binary = "$binary.exe"
+      $binary = "$binary.exe".ToLower()
 
       if ($null -eq $servicesHashmap[$binary]) {
         $servicesHashmap.Add($binary, [System.Collections.ArrayList]@())
@@ -76,7 +76,6 @@ function Show-FHActiveConnectionsRulesDetails {
         Write-Verbose -Message "-- Parent details: [$($proccessHashmap[$parentProcessId])]"
       }
 
-
       # check if exe is part of a service, use service hashmap to improve speed
       $relatedService = $servicesHashmap[$processDetails.Path]
       if ($relatedService) {
@@ -105,35 +104,4 @@ function Show-FHActiveConnectionsRulesDetails {
       Write-Error -Message "Exception [$($_.Message)] during processing connection [$conn]" -ErrorAction Continue
     }
   }
-
-  # provide details from today's firewall log if available
-  Write-Verbose -Message "`n`n ==== Check firewall logs for additional current state details"
-  $blockedProgramsHashmap = Get-FHFirewallTodayLogDetails -ErrorAction Stop -Verbose
-
-  foreach ($blockedExe in $blockedProgramsHashmap.getEnumerator().Name) {
-    Write-Verbose -Message "Blocked exe [$blockedExe]"
-    $rules = $entities.AuthorizedExes[$blockedExe].Rules
-    if ($rules) {
-      Write-Verbose -Message "-- Related exe rules for [$blockedExe] details: [$rules]"
-    } else {
-      Write-Verbose -Message "-- No exe rules found for exe [$blockedExe]"
-    }
-    Write-Verbose -Message "-- Destination details: [$($blockedProgramsHashmap[$blockedExe].BlockedIps.BlockedDestinationIp -join ", ")]"
-    # check if exe is part of a service, use service hashmap to improve speed
-    $relatedService = $servicesHashmap[$blockedExe]
-    if ($relatedService) {
-      $exactService = Get-WmiObject -Class Win32_Service -Filter "ProcessId='$($blockedProgramsHashmap[$blockedExe].FullProcessDetails.Id.ToString())'" -ErrorAction Stop | Select-Object -Property Name, DisplayName, Description, PathName
-      Write-Verbose -Message "-- Related service details: [$exactService]"
-      # lookup rules related to this service
-      $rules = $entities.AuthorizedServices[$exactService.Name].Rules
-      if ($rules) {
-        Write-Verbose -Message "-- Related service rules details: [$rules]"
-      } else {
-        Write-Verbose -Message "-- No firewall rules found for service [$($exactService.Name)]."
-      }
-    }
-
-    Write-Verbose -Message "`n"
-  }
-
 }

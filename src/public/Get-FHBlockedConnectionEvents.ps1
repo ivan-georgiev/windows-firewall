@@ -13,7 +13,7 @@
   $drivesMap = @{}
   foreach ($line in $volumeDetailsRaw) {
     if ($line -match '^([A-Z]:)\s+([\\A-Za-z0-9]+).*') {
-      $drivesMap.Add($Matches[2].ToLower(), $Matches[1].ToUpper())
+      $drivesMap.Add($Matches[2].ToLower(), $Matches[1].ToLower())
     }
   }
 
@@ -58,7 +58,7 @@
     if ($messageDetails[1] -imatch '^(\\device\\harddiskvolume[0-9])(\\.+)$') {
       $exePath = $drivesMap[$Matches[1].ToLower()] + $Matches[2]
     } else {
-      Write-Warning -Message "Cannot prase Application property of event [$($messageDetails[1])]. Skip."
+      Write-Warning -Message "Cannot prase Application property of event [Process: $($messageDetails[1]) PID: $($messageDetails[0])]. Skip."
       continue
     }
 

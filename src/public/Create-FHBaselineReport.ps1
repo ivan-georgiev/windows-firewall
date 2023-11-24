@@ -14,11 +14,14 @@
   }
   Write-Verbose -Message "Network profile: [$profileName]"
 
+  $currentDate = Get-Date
+
   # result file
-  $baselineFilename = "Baseline-$profileName-$(((Get-Date).ToUniversalTime()).ToString('yyyyMMdd_HHmmss')).json"
+  $baselineFilename = "Baseline-$profileName-$(($currentDate.ToUniversalTime()).ToString('yyyyMMdd_HHmmss')).json"
 
   # generate rules report
   $entities = Get-FHFirewallAuthorizedEntities -NetworkProfileName $profileName -ErrorAction Stop -Verbose
+  $entities | Add-Member -NotePropertyName DateGenerated -NotePropertyValue ($currentDate.ToUniversalTime()).ToString('yyyy-MM-dd HH:mm:ss') -ErrorAction Stop
 
   # save rules report to a file
   $entities | ConvertTo-Json -Depth 5 | Out-File -FilePath $baselineFilename -Encoding utf8 -ErrorAction Stop -Confirm:$false

@@ -13,6 +13,10 @@
     "Description": "Allow All LocalNetwork Traffic"
   },
   {
+    "Program": "c:\\windows\\system32\\svchost.exe",
+    "Comment": "Allows communication of Windows services, Service rules do not work. Associated services: AarSvc_71635, AJRouter, AppIDSvc, Appinfo, AppMgmt, AppReadiness, AppXSvc, AssignedAccessManagerSvc, AudioEndpointBuilder, Audiosrv, autotimesvc, AxInstSV, BcastDVRUserService_71635, BDESVC, BFE, BITS, BluetoothUserService_71635, BrokerInfrastructure, Browser, BTAGService, BthAvctpSvc, bthserv, camsvc, CaptureService_71635, cbdhsvc_71635, CDPSvc, CDPUserSvc_71635, CertPropSvc, ClipSVC, CloudBackupRestoreSvc_71635, cloudidsvc, CmService, ConsentUxUserSvc_71635, CoreMessagingRegistrar, CryptSvc, CscService, DcomLaunch, dcsvc, defragsvc, DeviceAssociationBrokerSvc_71635, DeviceAssociationService, DeviceInstall, DevicePickerUserSvc_71635, DevicesFlowUserSvc_71635, DevQueryBroker, Dhcp, diagsvc, DiagTrack, DialogBlockingService, DispBrokerDesktopSvc, DisplayEnhancementService, DmEnrollmentSvc, dmwappushservice, Dnscache, DoSvc, dot3svc, DPS, DsmSvc, DsSvc, DusmSvc, EapHost, embeddedmode, EntAppSvc, EventLog, EventSystem, fdPHost, FDResPub, fhsvc, FontCache, FrameServer, FrameServerMonitor, gpsvc, GraphicsPerfSvc, HgClientService, hidserv, HNS, HvHost, icssvc, IKEEXT, InstallService, InventorySvc, iphlpsvc, IpxlatCfgSvc, KtmRm, LanmanServer, LanmanWorkstation, lfsvc, LicenseManager, lltdsvc, lmhosts, LSM, LxpSvc, LxssManager, MapsBroker, MessagingService_71635, MixedRealityOpenXRSvc, mpssvc, MSiSCSI, MsKeyboardFilter, NaturalAuthentication, NcaSvc, NcbService, NcdAutoSetup, Netman, netprofm, NetSetupSvc, NgcCtnrSvc, NgcSvc, NlaSvc, nsi, nvagent, OneSyncSvc_71635, p2pimsvc, p2psvc, P9RdrService_71635, PcaSvc, PeerDistSvc, PenService_71635, PhoneSvc, PimIndexMaintenanceSvc_71635, pla, PlugPlay, PNRPAutoReg, PNRPsvc, PolicyAgent, Power, PrintNotify, PrintWorkflowUserSvc_71635, ProfSvc, PushToInstall, QWAVE, RasAuto, RasMan, RemoteAccess, RemoteRegistry, RetailDemo, RmSvc, RpcEptMapper, RpcSs, SCardSvr, ScDeviceEnum, Schedule, SCPolicySvc, SDRSVC, seclogon, SEMgrSvc, SENS, SensorService, SensrSvc, SessionEnv, SharedAccess, SharedRealitySvc, ShellHWDetection, shpamsvc, smphost, SmsRouter, SSDPSRV, SstpSvc, StateRepository, StiSvc, StorSvc, svsvc, swprv, SysMain, SystemEventsBroker, TapiSrv, TermService, TextInputManagementService, Themes, TimeBrokerSvc, TokenBroker, TrkWks, TroubleshootingSvc, tzautoupdate, UdkUserSvc_71635, UmRdpService, UnistoreSvc_71635, upnphost, UserDataSvc_71635, UserManager, UsoSvc, VacSvc, vmicguestinterface, vmicheartbeat, vmickvpexchange, vmicrdv, vmicshutdown, vmictimesync, vmicvmsession, vmicvss, W32Time, WalletService, WarpJITSvc, WbioSrvc, Wcmsvc, wcncsvc, WdiServiceHost, WdiSystemHost, WebClient, webthreatdefsvc, webthreatdefusersvc_71635, Wecsvc, WEPHOSTSVC, wercplsupport, WerSvc, WFDSConMgrSvc, WiaRpc, WinHttpAutoProxySvc, Winmgmt, WinRM, wisvc, WlanSvc, wlidsvc, wlpasvc, WManSvc, workfolderssvc, WpcMonSvc, WPDBusEnum, WpnService, WpnUserService_71635, wscsvc, wuauserv, WwanSvc, XblAuthManager, XblGameSave, XboxGipSvc, XboxNetApiSvc."
+  },
+  {
     "Program": "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
   },
   {
@@ -31,31 +35,36 @@
     "Program": "C:\\Program Files\\Git\\mingw64\\libexec\\git-core\\git-remote-https.exe"
   },
   {
-    "Service": "SecurityUpdateService",
-    "Comment": "Connects installed HP security applications to the online Controller service.",
-    "Description": "Allow 'HP Security Update Service' service"
+    "Program": "c:\\program files\\hp\\security update service\\4.4.7.365\\securityupdateservice.exe",
+    "Comment": "Associated services: SecurityUpdateService."
   },
   {
-    "Comment": "Maintains date and time synchronization on all clients and servers in the network. If this service is stopped, date and time synchronization will be unavailable. If this service is disabled, any services that explicitly depend on it will fail to start. ",
-    "Service": "W32Time",
-    "Description": "Allow 'Windows Time' service"
+    "Program": "c:\\program files\\hp\\sure click\\servers\\brhostsvr.exe"
   },
   {
-    "Comment": "Transfers files in the background using idle network bandwidth. If the service is disabled, then any applications that depend on BITS, such as Windows Update or MSN Explorer, will be unable to automatically download programs and other information. ",
-    "Service": "BITS",
-    "Description": "Allow 'Background Intelligent Transfer Service' service"
+    "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\apphelpercap.exe",
+    "Comment": "Associated services: HPAppHelperCap."
   },
   {
-    "Comment": "Provides infrastructure support for the Microsoft Store.  This service is started on demand and if disabled then installations will not function properly. ",
-    "Service": "InstallService",
-    "Description": "Allow 'Microsoft Store Install Service' service"
+    "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\bridgecommunication.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\sysinfocap.exe",
+    "Comment": "Associated services: HPSysInfoCap."
+  },
+  {
+    "Program": "c:\\windows\\system32\\smartscreen.exe"
   },
   {
     "Program": "c:\\windows\\system32\\taskhostw.exe"
   },
   {
-    "Comment": "Performs content delivery optimization tasks ",
-    "Service": "DoSvc",
-    "Description": "Allow 'Delivery Optimization' service"
+    "Program": "c:\\windows\\system32\\wermgr.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe"
+  },
+  {
+    "Program": "c:\\program files (x86)\\hp\\hp support framework\\resources\\hpupdate\\hpupdate.exe"
   }
 ]

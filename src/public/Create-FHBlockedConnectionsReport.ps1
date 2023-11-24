@@ -1,0 +1,103 @@
+﻿function Create-FHBlockedConnectionsReport {
+  [CmdletBinding()]
+  param(
+    [Parameter()]
+    [string] $EventFilterStartTime = (Get-Date -Format 'yyyy-MM-dd'),
+
+    [Parameter()]
+    [switch] $DoNotUseBaselineReportFile
+  )
+
+  $activeProfile = Get-NetFirewallSetting -PolicyStore ActiveStore | Select-Object -ExpandProperty ActiveProfile
+  Write-Verbose -Message "Active network profile: [$activeProfile]"
+  # get firewall details
+  $entities = $null
+  if (-not $DoNotUseBaselineReportFile.IsPresent) {
+    try {
+      $baselineFile = Get-Item -Path "Baseline-$activeProfile-latest.json" -ErrorAction Stop
+      Write-Verbose -Message "Using Baseline file [$($baselineFile.Name)] from [$($baselineFile.LastWriteTime)]. Delete it if it might be old."
+      $entities = Get-Content -Path "Baseline-$activeProfile-latest.json" -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
+    } catch [System.Management.Automation.ItemNotFoundException] {
+      Write-Warning -Message "Error getting baseline file content [$($_.Exception.Message)]. Generate new baseline report."
+      $null = Create-FHBaselineReport -NetworkProfileName $activeProfile -ErrorAction Stop
+      # get baseline content
+      $entities = Get-Content -Path "Baseline-$activeProfile-latest.json" -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
+    }
+  }
+  if ($null -eq $entities) {
+    Write-Verbose -Message "Baseline file not detected. Get enitities dynamically"
+    $entities = Get-FHFirewallAuthorizedEntities -NetworkProfileName $activeProfile -ErrorAction Stop -Verbose
+  }
+
+  # result
+  $config = [System.Collections.ArrayList]@()
+  $report = [System.Collections.ArrayList]@()
+  # result file
+  $date = $(((Get-Date).ToUniversalTime()).ToString('yyyyMMdd-HHmmss'))
+  $configFilename = "ConfigOnly-$date.json"
+  $reportFilename = "ConfigReport-$date.json"
+
+  Write-Verbose -Message "Getting blocked enities since [$EventFilterStartTime]"
+  $blockedEntities = Get-FHBlockedExes -EventFilterStartTime $EventFilterStartTime -ErrorAction Stop -Verbose
+
+  Write-Verbose -Message "Creating config for blocked Programs"
+  foreach ($item in $blockedEntities.BlockedProgramsList) {
+
+    $sb = [System.Text.StringBuilder]::new()
+
+    $rules = $entities.AuthorizedExes[$item.ProcessesExe].Rules
+    if (-not $rules) {
+      if (($item.AssociatedServices | Measure-Object).Count -gt 0) {
+        [void]$sb.Append("Associated services: $($item.AssociatedServices.Name -join ", "). ")
+      }
+      # create config, comment is optional
+      if ($sb.Length -eq 0) {
+        [void] $config.add(@{
+            Program = $item.ProcessesExe
+          })
+      } else {
+        [void] $config.add(@{
+            Program = $item.ProcessesExe
+            Comment = $sb.ToString()
+          })
+      }
+    } else {
+      [void]$sb.Append("Firewall Rules: $($rules -join ', '). ")
+    }
+    if (($item.AssociatedServices | Measure-Object).Count -gt 0) {
+      [void]$sb.Append("Associated services: $($item.AssociatedServices.Name -join ", "). ")
+    }
+    [void]$sb.Append("IPs: $($item.BlockedIps -join ', '). ")
+    [void]$sb.Append("Connections count: $($item.Counter). ")
+
+    [void] $report.add(@{
+        Program = $item.ProcessesExe
+        Comment = $sb.ToString()
+      })
+
+  }
+
+  if (($report | Measure-Object).Count -eq 0) {
+    Write-Verbose -Message "Nothing to report. No files will be created."
+    return
+  }
+
+  # save report rules to file
+  Write-Verbose -Message "Saving Report to file [$reportFilename]"
+  $report | Sort-Object -Property "Program", "Service" | ConvertTo-Json -Depth 5 -ErrorAction Stop | Out-File -FilePath $reportFilename -Encoding utf8 -Confirm:$false -ErrorAction Stop
+
+  # save config file, if not empty
+  $programRulesCount = ($config | Measure-Object).Count
+  if ($programRulesCount -eq 0) {
+    Write-Verbose -Message "Nothing to record. Config file will not be created."
+    return
+  }
+  Write-Verbose -Message "Created [$programRulesCount] rules for Programs"
+
+  # save config rules to file
+  Write-Verbose -Message "Saving Config to file [$configFilename]"
+  $config | Sort-Object -Property "Program", "Service" | ConvertTo-Json -Depth 5 -ErrorAction Stop | Out-File -FilePath $configFilename -Encoding utf8 -Confirm:$false -ErrorAction Stop
+
+  # return filename
+  $configFilename
+}

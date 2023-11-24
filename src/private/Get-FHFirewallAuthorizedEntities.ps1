@@ -115,7 +115,7 @@ function Get-FHFirewallAuthorizedEntities {
     } else {
       Write-Verbose -Message "Exe rule."
       if ($applicationFilter.Program -eq "System") {
-        Write-Verbose -Message "System exe. Continue."
+        Write-Verbose -Message "System Keyword. Continue."
         [void] $systemExeRules.Add($rule.Name)
         continue
       }
@@ -131,7 +131,7 @@ function Get-FHFirewallAuthorizedEntities {
       } else {
         $exePath = $applicationFilter.Program
       }
-      $exePath = $exePath.Trim('"')
+      $exePath = $exePath.Trim('"').ToLower()
 
       if ($null -eq $authorizedExes[$exePath]) {
         $authorizedExes.Add($exePath, @{

@@ -1,4 +1,4 @@
-﻿function Get-FHBlockedEntitiesBasedOnEventlog {
+﻿function Get-FHBlockedEntities {
   [CmdletBinding()]
   param(
     [Parameter()]
@@ -47,8 +47,8 @@
   Write-Verbose -Message "Fetched [$eventsCount] Firewall events from EventLog"
 
   foreach ($e in $blockedConnectionsEvents) {
-    # per-exe report
-    $processesExe = $e.Application.ToLower()
+    # per-exe report, exe is lower case
+    $processesExe = $e.Application
     [string] $procId = $e.ProcessId
 
     #Write-Verbose -Message "`n`nProcessing [$($e.ProcessId)-$processesExe-$($e.DestAddress)]"
@@ -91,17 +91,24 @@
       #Write-Verbose -Message "-- Found assocated service(s)"
     }
 
-    # running processes WMI analysis
-    # skip processed
+    # Windows Firewall does not support filtering svchost provided services by Service name
+    # They need to be authorized by svchost.exe and is All or None.
+    # If in future that changes, this condition might be moved as -or condition to allow the WMI query
+    # which shows exact Service behind PID
+    if ($processDetails.Name -eq 'svchost' -and $processesExe -eq "c:\windows\system32\svchost.exe") {
+      continue
+    }
+
+    # skip processed PIDS for  WMI analysis
     if ($processedPIDs -contains $procId) {
       continue
     }
     [void] $processedPIDs.Add($procId)
 
-    # check if PID is in Running processes hashmap
+    # check if PID is in Running processes hashmap, if yes Get-WmiObject can detect which service owns it
+    # if there is more than one service configured with same exe
     $processDetails = $proccessHashmap[$procId]
     if (
-      ($processDetails.Name -eq 'svchost' -and $processesExe -eq "c:\windows\system32\svchost.exe") -or `
       ($processDetails.Path -and $processesExe -eq $processDetails.Path.ToLower())
     ) {
       Write-Verbose -Message "-- Blocked process is still running and WMI details will be taken to see if it is a service. Details: [$processDetails]"
@@ -122,24 +129,6 @@
         )
         continue
       }
-
-      # if process is not part of a service, check if parent is
-      if ($processDetails.Parent.Id -and "services" -ne $processDetails.Parent.Name) {
-        $parentProcessDetails = $proccessHashmap[$processDetails.Parent.Id.ToString()]
-        if ($parentProcessDetails.Path -and $servicesHashmap[$parentProcessDetails.Path.ToLower()]) {
-          Write-Verbose -Message "Fetching WMI details for parent procces [$($processDetails.Parent.Id)] associated with a service."
-          $exactService = Get-WmiObject -Class Win32_Service -Filter "ProcessId='$($processDetails.Parent.Id)'" -ErrorAction Stop | Select-Object -Property Name, DisplayName, Description, PathName
-          [void] $blockedServices.Add(
-            @{
-              Service    = $exactService
-              BlockedIps = $e.DestAddress
-              ExePath    = $processesExe
-              PID        = $procId
-              ParentPID  = $processDetails.Parent.Id
-            }
-          )
-        }
-      }
     }
   }
 
@@ -147,9 +136,9 @@
   foreach ($bs in $blockedServices) {
     $bs["ExecutableDetails"] = $blockedProgramsHashmap[$bs.ExePath]
   }
-  foreach ($bs in $blockedServices) {
-    $blockedProgramsHashmap.Remove($bs.ExePath)
-  }
+  # foreach ($bs in $blockedServices) {
+  #   $blockedProgramsHashmap.Remove($bs.ExePath)
+  # }
 
   # return
   [PSCustomObject]@{

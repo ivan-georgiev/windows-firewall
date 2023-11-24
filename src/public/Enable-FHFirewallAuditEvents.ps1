@@ -7,7 +7,7 @@
   )
 
   if ($Category -eq "FilteringPlatformConnection") {
-    auditpol /set /subcategory:"Filtering Platform Connection" /success:disable  /failure:enable
+    auditpol /set /category:"System" /subcategory:"Filtering Platform Connection" /success:disable  /failure:enable
     if ($LASTEXITCODE -ne 0 -or -not $?) {
       throw "auditpol error"
     }

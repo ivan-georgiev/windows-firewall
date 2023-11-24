@@ -37,6 +37,7 @@ function Compare-FHWithBaselineReport {
     $baselineFile = "Baseline-$activeProfile-latest.json"
   }
   $baselineEntities = Get-Content -Path $baselineFile -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
+  $dateGenerated = $baselineEntities.DateGenerated
 
   # generate rules report
   $rulesDiff = Compare-FHObjectWithNullSupport -ReferenceObject $baselineEntities.AllRules.GetEnumerator().Name -DifferenceObject $entities.AllRules.GetEnumerator().Name -ErrorAction Stop
@@ -75,6 +76,27 @@ function Compare-FHWithBaselineReport {
   }
   if ($appsDiff.Deleted) {
     Write-Verbose -Message "`n=== Deleted Firewall rules affecting Apps:`n$($appsDiff.Deleted -join "`n") `n`n"
+  }
+
+
+  # get MPSSVC Rule-Level Policy Change
+  try {
+    # get 4946 MPSSVC Rule-Level Policy Change  events
+    $events = Get-WinEvent -FilterHashtable @{
+      LogName   = 'Security'
+      StartTime = "$dateGenerated"
+      ID        = @(4946)
+    } -ErrorAction Stop -Verbose:$false | Sort-Object -Property TimeCreated -Descending
+
+    Write-Verbose -Message "`n === Rule changes events:`n $($events.Message.ToString().Split([Environment]::NewLine) | Select-String 'Rule Name:')`n`n"
+  } catch {
+    # if there are no events return $null
+    if ($_.Exception.Message -eq "No events were found that match the specified selection criteria.") {
+      Write-Verbose -Message "No MPSSVC Rule-Level Policy Change events found."
+    } else {
+      # raise other errors
+      throw
+    }
   }
 
   #return
