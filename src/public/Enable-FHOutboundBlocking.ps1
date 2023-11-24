@@ -14,8 +14,10 @@
 
   # Set DefaultOutboundAction to Block
   $HashArguments = @{
-    DefaultInboundAction            = "Block"
-    DefaultOutboundAction           = "Block"
+    DefaultInboundAction  = "Block"
+    DefaultOutboundAction = "Block"
   }
   Set-NetFirewallProfile @HashArguments -ErrorAction Stop
+
+  Enable-FHFirewallAuditEvents -ErrorAction Stop -Verbose
 }

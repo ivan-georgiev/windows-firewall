@@ -66,5 +66,11 @@
   },
   {
     "Program": "c:\\program files (x86)\\hp\\hp support framework\\resources\\hpupdate\\hpupdate.exe"
+  },
+  {
+    "Program": "c:\\program files (x86)\\microsoft\\edge\\application\\msedge.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\werfault.exe"
   }
 ]

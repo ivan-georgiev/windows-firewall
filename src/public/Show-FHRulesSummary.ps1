@@ -21,6 +21,7 @@ function Show-FHRulesSummary {
     $entities = Get-FHFirewallAuthorizedEntities -NetworkProfileName $activeProfile -ErrorAction Stop -Verbose
   }
 
+  Write-Verbose -Message "`n`n"
   Write-Verbose -Message "===== Rules granting all entities access non-local access:`n$($entities.AnyExeRules -join "`n")`n`n"
   Write-Verbose -Message "===== Authorized exes:`n$(($entities.AuthorizedExes.getEnumerator().Name | Sort-Object) -join "`n")`n`n"
   Write-Verbose -Message "===== Authorized services:`n"

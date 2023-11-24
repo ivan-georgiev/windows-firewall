@@ -15,7 +15,27 @@
   if (-not $DoNotUseBaselineReportFile.IsPresent) {
     try {
       $baselineFile = Get-Item -Path "Baseline-$activeProfile-latest.json" -ErrorAction Stop
-      Write-Verbose -Message "Using Baseline file [$($baselineFile.Name)] from [$($baselineFile.LastWriteTime)]. Delete it if it might be old."
+      Write-Verbose -Message "Detected Baseline file [$($baselineFile.Name)] from [$($baselineFile.LastWriteTime)]."
+      # get MPSSVC Rule-Level Policy Change
+      try {
+        # get 4946 MPSSVC Rule-Level Policy Change  events
+        $events = Get-WinEvent -FilterHashtable @{
+          LogName   = 'Security'
+          StartTime = "$($baselineFile.LastWriteTime.ToString('yyyy-MM-dd HH:mm:ss'))"
+          ID        = @(4946)
+        } -ErrorAction Stop -Verbose:$false
+        Write-Warning -Message "Rule changed events found. Generate new baseline report."
+        $null = Create-FHBaselineReport -NetworkProfileName $activeProfile -ErrorAction Stop
+      } catch {
+        # if there are no events return $null
+        if ($_.Exception.Message -eq "No events were found that match the specified selection criteria.") {
+          Write-Verbose -Message "No MPSSVC Rule-Level Policy Change events found. Baseline file will not be regenerated. Delete it if needed or pass -DoNotUseBaselineReportFile."
+        } else {
+          # raise other errors
+          throw
+        }
+      }
+      # get baseline file content
       $entities = Get-Content -Path "Baseline-$activeProfile-latest.json" -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
     } catch [System.Management.Automation.ItemNotFoundException] {
       Write-Warning -Message "Error getting baseline file content [$($_.Exception.Message)]. Generate new baseline report."

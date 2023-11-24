@@ -1,6 +1,6 @@
 ﻿
 
-function Disable-FHOutboundBlocking {
+function Enable-FHOutboundBlocking {
   [CmdletBinding()]
   param (
   )
@@ -8,4 +8,5 @@ function Disable-FHOutboundBlocking {
     DefaultOutboundAction = "Allow"
   }
   Set-NetFirewallProfile @HashArguments -ErrorAction Stop
+  Disable-FHFirewallAuditEvents -ErrorAction Stop -Verbose
 }
