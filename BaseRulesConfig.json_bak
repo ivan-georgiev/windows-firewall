@@ -1,0 +1,124 @@
+﻿[
+  {
+    "DisplayName": "FH-LocalNetwork",
+    "RemoteAddress": [
+      "LocalSubnet",
+      "DNS",
+      "DHCP",
+      "WINS",
+      "DefaultGateway",
+      "Intranet",
+      "PlayToDevice"
+    ],
+    "Description": "Allow All LocalNetwork Traffic"
+  },
+  {
+    "Program": "c:\\windows\\system32\\svchost.exe",
+    "Comment": "Allows communication of Windows services, Service rules do not work. Associated services: AarSvc_71635, AJRouter, AppIDSvc, Appinfo, AppMgmt, AppReadiness, AppXSvc, AssignedAccessManagerSvc, AudioEndpointBuilder, Audiosrv, autotimesvc, AxInstSV, BcastDVRUserService_71635, BDESVC, BFE, BITS, BluetoothUserService_71635, BrokerInfrastructure, Browser, BTAGService, BthAvctpSvc, bthserv, camsvc, CaptureService_71635, cbdhsvc_71635, CDPSvc, CDPUserSvc_71635, CertPropSvc, ClipSVC, CloudBackupRestoreSvc_71635, cloudidsvc, CmService, ConsentUxUserSvc_71635, CoreMessagingRegistrar, CryptSvc, CscService, DcomLaunch, dcsvc, defragsvc, DeviceAssociationBrokerSvc_71635, DeviceAssociationService, DeviceInstall, DevicePickerUserSvc_71635, DevicesFlowUserSvc_71635, DevQueryBroker, Dhcp, diagsvc, DiagTrack, DialogBlockingService, DispBrokerDesktopSvc, DisplayEnhancementService, DmEnrollmentSvc, dmwappushservice, Dnscache, DoSvc, dot3svc, DPS, DsmSvc, DsSvc, DusmSvc, EapHost, embeddedmode, EntAppSvc, EventLog, EventSystem, fdPHost, FDResPub, fhsvc, FontCache, FrameServer, FrameServerMonitor, gpsvc, GraphicsPerfSvc, HgClientService, hidserv, HNS, HvHost, icssvc, IKEEXT, InstallService, InventorySvc, iphlpsvc, IpxlatCfgSvc, KtmRm, LanmanServer, LanmanWorkstation, lfsvc, LicenseManager, lltdsvc, lmhosts, LSM, LxpSvc, LxssManager, MapsBroker, MessagingService_71635, MixedRealityOpenXRSvc, mpssvc, MSiSCSI, MsKeyboardFilter, NaturalAuthentication, NcaSvc, NcbService, NcdAutoSetup, Netman, netprofm, NetSetupSvc, NgcCtnrSvc, NgcSvc, NlaSvc, nsi, nvagent, OneSyncSvc_71635, p2pimsvc, p2psvc, P9RdrService_71635, PcaSvc, PeerDistSvc, PenService_71635, PhoneSvc, PimIndexMaintenanceSvc_71635, pla, PlugPlay, PNRPAutoReg, PNRPsvc, PolicyAgent, Power, PrintNotify, PrintWorkflowUserSvc_71635, ProfSvc, PushToInstall, QWAVE, RasAuto, RasMan, RemoteAccess, RemoteRegistry, RetailDemo, RmSvc, RpcEptMapper, RpcSs, SCardSvr, ScDeviceEnum, Schedule, SCPolicySvc, SDRSVC, seclogon, SEMgrSvc, SENS, SensorService, SensrSvc, SessionEnv, SharedAccess, SharedRealitySvc, ShellHWDetection, shpamsvc, smphost, SmsRouter, SSDPSRV, SstpSvc, StateRepository, StiSvc, StorSvc, svsvc, swprv, SysMain, SystemEventsBroker, TapiSrv, TermService, TextInputManagementService, Themes, TimeBrokerSvc, TokenBroker, TrkWks, TroubleshootingSvc, tzautoupdate, UdkUserSvc_71635, UmRdpService, UnistoreSvc_71635, upnphost, UserDataSvc_71635, UserManager, UsoSvc, VacSvc, vmicguestinterface, vmicheartbeat, vmickvpexchange, vmicrdv, vmicshutdown, vmictimesync, vmicvmsession, vmicvss, W32Time, WalletService, WarpJITSvc, WbioSrvc, Wcmsvc, wcncsvc, WdiServiceHost, WdiSystemHost, WebClient, webthreatdefsvc, webthreatdefusersvc_71635, Wecsvc, WEPHOSTSVC, wercplsupport, WerSvc, WFDSConMgrSvc, WiaRpc, WinHttpAutoProxySvc, Winmgmt, WinRM, wisvc, WlanSvc, wlidsvc, wlpasvc, WManSvc, workfolderssvc, WpcMonSvc, WPDBusEnum, WpnService, WpnUserService_71635, wscsvc, wuauserv, WwanSvc, XblAuthManager, XblGameSave, XboxGipSvc, XboxNetApiSvc."
+  },
+  {
+    "Program": "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+  },
+  {
+    "Program": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+  },
+  {
+    "Program": "C:\\Program Files (x86)\\uTorrent\\uTorrent.exe"
+  },
+  {
+    "Program": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+  },
+  {
+    "Program": "C:\\Program Files\\Git\\usr\\bin\\ssh.exe"
+  },
+  {
+    "Program": "C:\\Program Files\\Git\\mingw64\\libexec\\git-core\\git-remote-https.exe"
+  },
+  {
+    "Program": "c:\\program files\\hp\\security update service\\4.4.7.365\\securityupdateservice.exe",
+    "Comment": "Associated services: SecurityUpdateService."
+  },
+  {
+    "Program": "c:\\program files\\hp\\sure click\\servers\\brhostsvr.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\apphelpercap.exe",
+    "Comment": "Associated services: HPAppHelperCap."
+  },
+  {
+    "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\bridgecommunication.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\sysinfocap.exe",
+    "Comment": "Associated services: HPSysInfoCap."
+  },
+  {
+    "Program": "c:\\windows\\system32\\smartscreen.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\taskhostw.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\wermgr.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe"
+  },
+  {
+    "Program": "c:\\program files (x86)\\hp\\hp support framework\\resources\\hpupdate\\hpupdate.exe"
+  },
+  {
+    "Program": "c:\\program files (x86)\\microsoft\\edge\\application\\msedge.exe"
+  },
+  {
+    "Program": "c:\\windows\\system32\\werfault.exe"
+  },
+  {
+    "Description": "Product: Google Update. FileDescription: Google Installer. Associated services: gupdate, gupdatem. ",
+    "Program": "c:\\program files (x86)\\google\\update\\googleupdate.exe"
+  },
+  {
+    "Description": "Product: Microsoft Edge Update. FileDescription: Microsoft Edge Update. Associated services: edgeupdate, edgeupdatem. ",
+    "Program": "c:\\program files (x86)\\microsoft\\edgeupdate\\microsoftedgeupdate.exe"
+  },
+  {
+    "Description": "Product: Microsoft Bing Service. FileDescription: Microsoft Bing Service. ",
+    "Program": "c:\\users\\ivan\\appdata\\local\\microsoft\\bingsvc\\bingsvc.exe"
+  },
+  {
+    "Description": "Product: BSvcUpdater. FileDescription: BSvcUpdater. ",
+    "Program": "c:\\users\\ivan\\appdata\\local\\microsoft\\bingsvc\\bsvcupdater.exe"
+  },
+  {
+    "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Windows Explorer. ",
+    "Program": "c:\\windows\\explorer.exe"
+  },
+  {
+    "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Settings. ",
+    "Program": "c:\\windows\\immersivecontrolpanel\\systemsettings.exe"
+  },
+  {
+    "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Device Census. ",
+    "Program": "c:\\windows\\system32\\devicecensus.exe"
+  },
+  {
+    "Description": "Product: HP Touchpoint Analytics Client. FileDescription: HP Touchpoint Analytics Client Service. Associated services: HpTouchpointAnalyticsService. Service details: . ",
+    "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpanalyticscomp.inf_amd64_83b4a127df981b67\\x64\\touchpointanalyticsclientservice.exe"
+  },
+  {
+    "Description": "Product: Microsoft Malware Protection. FileDescription: Microsoft Malware Protection Signature Update Stub. ",
+    "Program": "c:\\windows\\system32\\mpsigstub.exe"
+  },
+  {
+    "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Windows host process (Rundll32). ",
+    "Program": "c:\\windows\\system32\\rundll32.exe"
+  },
+  {
+    "Description": "Product: Microsoft® Windows® Operating System. FileDescription: SIH Client. ",
+    "Program": "c:\\windows\\system32\\sihclient.exe"
+  },
+  {
+    "Description": "Product: Microsoft® Windows® Operating System. FileDescription: MoUSO Core Worker Process. ",
+    "Program": "c:\\windows\\uus\\packages\\preview\\amd64\\mousocoreworker.exe"
+  }
+]

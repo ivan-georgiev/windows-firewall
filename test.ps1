@@ -19,6 +19,7 @@ $ErrorActionPreference = "Stop"
 #Create-FHFirewallRules -RulesToCreateConfig $config -DeleteIfExists:$false -ErrorAction Stop -Verbose
 
 
-Create-FHBlockedConnectionsReport -ErrorAction Stop -Verbose
+#Create-FHBlockedConnectionsReport -ErrorAction Stop -Verbose
 #Create-FHBaselineReport -ErrorAction Stop -Verbose
 #Compare-FHWithBaselineReport -Verbose -ErrorAction Stop -CurrentStateFile .\Baseline-Private-20231124_150145.json
+Get-FHRulesToCreateConfig -ErrorAction Stop -Verbose

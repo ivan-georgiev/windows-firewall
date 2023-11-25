@@ -3,6 +3,7 @@
   param (
     [Parameter()]
     [string] $AdditionalConfigFile
+
   )
 
   $additionalConfig = @()
@@ -13,7 +14,12 @@
   $baseRulesFromJson = Get-Content -Path "BaseRulesConfig.json" -ErrorAction Stop | ConvertFrom-Json -Depth 5 -AsHashtable -ErrorAction Stop
   $baseRulesFromPs1 = . "./BaseRulesConfig.ps1"
 
-  $combinedConfig = $baseRulesFromPs1 + $baseRulesFromJson + $additionalConfig
+  $combinedConfig = @()
+  foreach ($cfg in $baseRulesFromJson.GetEnumerator()) {
+    $combinedConfig += $cfg.Value
+  }
+
+  $combinedConfig = $baseRulesFromPs1 + $additionalConfig
 
   # return
   [PSCustomObject]@{
@@ -31,6 +37,6 @@
       RemotePort    = "Any"
       Description   = "Rule Created by Firewall Helper script"
     }
-    Rules       = $combinedConfig
+    Rules        = $combinedConfig
   }
 }

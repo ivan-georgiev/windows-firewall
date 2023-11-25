@@ -54,7 +54,7 @@
   $report = [System.Collections.ArrayList]@()
   # result file
   $date = $(((Get-Date).ToUniversalTime()).ToString('yyyyMMdd-HHmmss'))
-  $configFilename = "ConfigOnly-$date.json"
+  $configFilename = "Config-$date.json"
   $reportFilename = "ConfigReport-$date.json"
 
   Write-Verbose -Message "Getting blocked enities since [$EventFilterStartTime]"
@@ -63,39 +63,44 @@
   Write-Verbose -Message "Creating config for blocked Programs"
   foreach ($item in $blockedEntities.BlockedProgramsList) {
 
-    $sb = [System.Text.StringBuilder]::new()
+    $comment = [System.Text.StringBuilder]::new()
+    $description = [System.Text.StringBuilder]::new()
 
+    # file details
+    $itemDetails = Get-Item -Path $item.ProcessesExe -ErrorAction Stop
+    [void] $description.Append("Product: $($itemDetails.VersionInfo.ProductName). ")
+    if ($itemDetails.VersionInfo.ProductProductName -ne $itemDetails.VersionInfo.FileDescription) {
+      [void] $description.Append("FileDescription: $($itemDetails.VersionInfo.FileDescription). ")
+    }
+
+    # associated services details
+    if (($item.AssociatedServices | Measure-Object).Count -gt 0) {
+      [void]$description.Append("Associated services: $($item.AssociatedServices.Name -join ", "). ")
+    }
+    if (($item.AssociatedServices | Measure-Object).Count -eq 1) {
+      [void]$description.Append("Service details: $($entities.ServicesHashmap[$item.AssociatedServices[0].Name].Description). ")
+    }
+
+    # rules details
     $rules = $entities.AuthorizedExes[$item.ProcessesExe].Rules
     if (-not $rules) {
-      if (($item.AssociatedServices | Measure-Object).Count -gt 0) {
-        [void]$sb.Append("Associated services: $($item.AssociatedServices.Name -join ", "). ")
-      }
-      # create config, comment is optional
-      if ($sb.Length -eq 0) {
-        [void] $config.add(@{
-            Program = $item.ProcessesExe
-          })
-      } else {
-        [void] $config.add(@{
-            Program = $item.ProcessesExe
-            Comment = $sb.ToString()
-          })
-      }
-    } else {
-      [void]$sb.Append("Firewall Rules: $($rules -join ', '). ")
+      [void] $config.add(@{
+          Program     = $item.ProcessesExe
+          Description = $description.ToString()
+        })
     }
-    if (($item.AssociatedServices | Measure-Object).Count -gt 0) {
-      [void]$sb.Append("Associated services: $($item.AssociatedServices.Name -join ", "). ")
-    }
-    [void]$sb.Append("IPs: $($item.BlockedIps -join ', '). ")
-    [void]$sb.Append("Connections count: $($item.Counter). ")
-
-    [void] $report.add(@{
-        Program = $item.ProcessesExe
-        Comment = $sb.ToString()
-      })
-
+  } else {
+    [void]$comment.Append("Firewall Rules: $($rules -join ', '). ")
   }
+
+  [void]$comment.Append("IPs: $($item.BlockedIps -join ', '). ")
+  [void]$comment.Append("Connections count: $($item.Counter). ")
+
+  [void] $report.add(@{
+      Program     = $item.ProcessesExe
+      Description = $description.ToString()
+      Comment     = $comment.ToString()
+    })
 
   if (($report | Measure-Object).Count -eq 0) {
     Write-Verbose -Message "Nothing to report. No files will be created."
