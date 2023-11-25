@@ -1,4 +1,4 @@
-﻿function Get-FHTBlockedConnectionEvents {
+﻿function Get-FHBlockedConnectionEvents {
   [CmdletBinding()]
   param(
     [Parameter()]
@@ -55,7 +55,9 @@
     $messageDetails = $e.GetPropertyValues($selector)
 
     # Get exe path and fix format: \device\harddiskvolume3\windows\system32\svchost.exe to C:\windows\system32\svchost.exe
-    if ($messageDetails[1] -imatch '^(\\device\\harddiskvolume[0-9])(\\.+)$') {
+    if ($messageDetails[1] -eq "System" -and $messageDetails[0] -eq 4) {
+      $exePath = "System"
+    } elseif ($messageDetails[1] -imatch '^(\\device\\harddiskvolume[0-9])(\\.+)$') {
       $exePath = $drivesMap[$Matches[1].ToLower()] + $Matches[2]
     } else {
       Write-Warning -Message "Cannot prase Application property of event [Process: $($messageDetails[1]) PID: $($messageDetails[0])]. Skip."

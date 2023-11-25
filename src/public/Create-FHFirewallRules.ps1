@@ -15,12 +15,17 @@ function Create-FHFirewallRules {
     [switch] $DeleteIfExists,
 
     [Parameter()]
-    [switch] $GetConfig
+    [switch] $GetConfig,
+
+    [Parameter()]
+    [string[]] $Filter = @()
   )
 
   # run get config cmdlet if swith is passed
   if ($GetConfig.IsPresent) {
-    $params = @{}
+    $params = @{
+      Filter = $Filter
+    }
     if ($PSBoundParameters.ContainsKey('AdditionalConfigFile')) {
       $params.Add('AdditionalConfigFile', $AdditionalConfigFile)
     }
@@ -33,10 +38,30 @@ function Create-FHFirewallRules {
     $rulesToCreate = $RulesToCreateConfig.Rules
   }
 
+  $servicesList = (Get-Service -ErrorAction SilentlyContinue).Name
+
   Write-Verbose -Message "Found [$(($rulesToCreate | Measure-Object).Count)] rules"
   foreach ($ruleParams in $rulesToCreate) {
 
     [hashtable] $params = Merge-FHHashtables -HashtableA $commonParams -HashtableB $ruleParams -ErrorAction Stop
+
+    # do not create rules for non-existing Entities
+    if ($params.Program -and $params.Program -ne "System") {
+      try {
+        $itemDetails = Get-Item -Path $params.Program -ErrorAction Stop
+      } catch [System.Management.Automation.ItemNotFoundException] {
+        Write-Warning -Message "File [$($params.Program)] not found. Skip rule."
+        continue
+      }
+    }
+    if ($params.Service) {
+      if ($servicesList -notcontains $params.Service) {
+        Write-Warning -Message "Service [$($params.Service)] not found. Skip rule."
+        continue
+      }
+    }
+    # TODO: App existence validation
+
 
     # remove comments
     $params.Remove("Comment")

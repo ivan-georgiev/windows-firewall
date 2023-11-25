@@ -72,6 +72,7 @@
       # if single service has the exe, no need to analyze runtime
       if (($associatedServices | Measure-Object).Count -eq 1) {
 
+        # check if already processed
         if (($blockedServices.Service) -contains $associatedServices[0] ) {
           continue
         }
@@ -89,45 +90,45 @@
         continue
       }
       #Write-Verbose -Message "-- Found assocated service(s)"
-    }
 
-    # Windows Firewall does not support filtering svchost provided services by Service name
-    # They need to be authorized by svchost.exe and is All or None.
-    # If in future that changes, this condition might be moved as -or condition to allow the WMI query
-    # which shows exact Service behind PID
-    if ($processDetails.Name -eq 'svchost' -and $processesExe -eq "c:\windows\system32\svchost.exe") {
-      continue
-    }
-
-    # skip processed PIDS for  WMI analysis
-    if ($processedPIDs -contains $procId) {
-      continue
-    }
-    [void] $processedPIDs.Add($procId)
-
-    # check if PID is in Running processes hashmap, if yes Get-WmiObject can detect which service owns it
-    # if there is more than one service configured with same exe
-    $processDetails = $proccessHashmap[$procId]
-    if (
-      ($processDetails.Path -and $processesExe -eq $processDetails.Path.ToLower())
-    ) {
-      Write-Verbose -Message "-- Blocked process is still running and WMI details will be taken to see if it is a service. Details: [$processDetails]"
-
-      # PID is part of Service config, check which service exactly
-      if ($associatedServices) {
-        Write-Verbose -Message "Fetching WMI details for [$procId] associated with a service."
-        $exactService = Get-WmiObject -Class Win32_Service -Filter "ProcessId='$procId'" -ErrorAction Stop | Select-Object -Property Name, DisplayName, Description, PathName
-        Write-Verbose -Message "-- Related service details: [$exactService]"
-        [void] $blockedServices.Add(
-          @{
-            Service    = $exactService
-            BlockedIps = $e.DestAddress
-            ExePath    = $processesExe
-            PID        = $procId
-            ParentPID  = $processDetails.Parent.Id
-          }
-        )
+      # Windows Firewall does not support filtering svchost provided services by Service name
+      # They need to be authorized by svchost.exe and is All or None.
+      # If in future that changes, this condition might be moved as -or condition to allow the WMI query
+      # which shows exact Service behind PID
+      if ($processDetails.Name -eq 'svchost' -and $processesExe -eq "c:\windows\system32\svchost.exe") {
         continue
+      }
+
+      # skip processed PIDS for WMI analysis
+      if ($processedPIDs -contains $procId) {
+        continue
+      }
+      [void] $processedPIDs.Add($procId)
+
+      # check if PID is in Running processes hashmap, if yes Get-WmiObject can detect which service owns it
+      # if there is more than one service configured with same exe
+      $processDetails = $proccessHashmap[$procId]
+      if (
+      ($processDetails.Path -and $processesExe -eq $processDetails.Path.ToLower())
+      ) {
+        Write-Verbose -Message "-- Blocked process is still running and WMI details will be taken to see if it is a service. Details: [$processDetails]"
+
+        # PID is part of Service config, check which service exactly
+        if ($associatedServices) {
+          Write-Verbose -Message "Fetching WMI details for [$procId] associated with a service."
+          $exactService = Get-WmiObject -Class Win32_Service -Filter "ProcessId='$procId'" -ErrorAction Stop | Select-Object -Property Name, DisplayName, Description, PathName
+          Write-Verbose -Message "-- Related service details: [$exactService]"
+          [void] $blockedServices.Add(
+            @{
+              Service    = $exactService
+              BlockedIps = $e.DestAddress
+              ExePath    = $processesExe
+              PID        = $procId
+              ParentPID  = $processDetails.Parent.Id
+            }
+          )
+          continue
+        }
       }
     }
   }
@@ -136,9 +137,9 @@
   foreach ($bs in $blockedServices) {
     $bs["ExecutableDetails"] = $blockedProgramsHashmap[$bs.ExePath]
   }
-  # foreach ($bs in $blockedServices) {
-  #   $blockedProgramsHashmap.Remove($bs.ExePath)
-  # }
+  foreach ($bs in $blockedServices) {
+    $blockedProgramsHashmap.Remove($bs.ExePath)
+  }
 
   # return
   [PSCustomObject]@{

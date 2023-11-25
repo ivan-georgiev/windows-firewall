@@ -6,19 +6,19 @@
     [string] $Category = "All"
   )
 
+  Write-Verbose -Message "Configure Audit FilteringPlatformConnection"
   if (@("FilteringPlatformConnection", "All") -contains $Category) {
-    & auditpol /set /category:"System" /subcategory:"Filtering Platform Connection" /success:disable  /failure:enable
+    $null = & auditpol /set /category:"System" /subcategory:"Filtering Platform Connection" /success:disable  /failure:enable
     if ($LASTEXITCODE -ne 0 -or -not $?) {
       throw "auditpol error"
     }
-    return
   }
 
+  Write-Verbose -Message "Configure Audit RuleLevelChanges"
   if (@("RuleLevelChanges", "All") -contains $Category) {
-    & auditpol /set /subcategory:"MPSSVC Rule-Level Policy Change" /Success:Enable /Failure:Enable
+    $null = & auditpol /set /subcategory:"MPSSVC Rule-Level Policy Change" /Success:Enable /Failure:Enable
     if ($LASTEXITCODE -ne 0 -or -not $?) {
       throw "auditpol error"
     }
-    return
   }
 }

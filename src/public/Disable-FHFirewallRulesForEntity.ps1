@@ -7,7 +7,7 @@ function Disable-FHFirewallRulesForEntity {
     [string] $Name,
 
     [Parameter(Mandatory)]
-    [ValidateSet("ServiceName", "ServiceDisplayName", "RuleDisplayName", "Exe", "AppDisplayName")]
+    [ValidateSet("ServiceName", "ServiceDisplayName", "RuleDisplayName", "RuleGroup", "Program", "AppDisplayName")]
     [string[]] $EntityType,
 
     [Parameter()]
@@ -21,7 +21,7 @@ function Disable-FHFirewallRulesForEntity {
   switch ($EntityType) {
     "ServiceName" {
       $rules = Get-NetFirewallServiceFilter -Service $Name -ErrorAction Stop |  Get-NetFirewallRule -ErrorAction Stop
-      $rulesFiltered = $rules | Where-Object -FilterScript { $_.Direction -eq "Outbound" -and @("Any", $NetworkProfileName) -contains $_.Profile } -ErrorAction Stop
+      $rulesFiltered = $rules | Where-Object -FilterScript { $_.Direction -eq "Outbound" -and ($_.Profile.ToString().Contains($NetworkProfileName) -or $_.Profile.ToString() -eq "Any") } -ErrorAction Stop
       if ($Revert.IsPresent) {
         $rulesFiltered | Enable-NetFirewallRule -ErrorAction Stop
       } else {
@@ -31,7 +31,7 @@ function Disable-FHFirewallRulesForEntity {
     "ServiceDisplayName" {
       $serviceName = (Get-Service -DisplayName $Name -ErrorAction Stop).Name
       $rules = Get-NetFirewallServiceFilter -Service $serviceName -ErrorAction Stop |  Get-NetFirewallRule -ErrorAction Stop
-      $rulesFiltered = $rules | Where-Object -FilterScript { $_.Direction -eq "Outbound" -and $_.Enabled -eq "True" -and @("Any", $NetworkProfileName) -contains $_.Profile } -ErrorAction Stop
+      $rulesFiltered = $rules | Where-Object -FilterScript { $_.Direction -eq "Outbound" -and ($_.Profile.ToString().Contains($NetworkProfileName) -or $_.Profile.ToString() -eq "Any") } -ErrorAction Stop
       if ($Revert.IsPresent) {
         $rulesFiltered | Enable-NetFirewallRule -ErrorAction Stop
       } else {
@@ -44,9 +44,15 @@ function Disable-FHFirewallRulesForEntity {
       } else {
         Disable-NetFirewallRule -DisplayName $Name -ErrorAction Stop
       }
-
     }
-    "Exe" {
+    "RuleGroup" {
+      if ($Revert.IsPresent) {
+        Get-NetFirewallRule -DisplayGroup $Name -Direction Outbound -ErrorAction Stop | Enable-NetFirewallRule -ErrorAction Stop
+      } else {
+        Get-NetFirewallRule -DisplayGroup $Name -Direction Outbound -ErrorAction Stop | Disable-NetFirewallRule -ErrorAction Stop
+      }
+    }
+    "Program" {
       # get all app filters
       $appFilters = Get-NetFirewallApplicationFilter -All -ErrorAction Stop
 
@@ -58,10 +64,10 @@ function Disable-FHFirewallRulesForEntity {
         } else {
           $exePath = $af.Program
         }
-        $exePath = $exePath.Trim('"')
+        $exePath = $exePath.Trim('"').ToLower()
 
         # check if exe matches
-        if ($exePath -eq $Name) {
+        if ($exePath -eq $Name.ToLower()) {
           # get related rules
           $rulesAll = $af | Get-NetFirewallRule -ErrorAction Stop
           $rules = $rulesAll | Where-Object -FilterScript { $_.Direction -eq "Outbound" }

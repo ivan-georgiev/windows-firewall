@@ -34,7 +34,7 @@
   $blockedProgramsHashmap = @{}
 
   # get blocked connections
-  $blockedConnectionsEvents = Get-FHTBlockedConnectionEvents -StartTime $EventFilterStartTime -ErrorAction Stop -Verbose
+  $blockedConnectionsEvents = Get-FHBlockedConnectionEvents -StartTime $EventFilterStartTime -ErrorAction Stop -Verbose
   $eventsCount = ($blockedConnectionsEvents | Measure-Object).Count
   Write-Verbose -Message "Fetched [$eventsCount] Firewall events from EventLog"
 

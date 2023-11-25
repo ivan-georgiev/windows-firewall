@@ -17,6 +17,143 @@
       "Description": "Product: Microsoft® Windows® Operating System. FileDescription:  Host Process for Windows Services.",
       "Program": "c:\\windows\\system32\\svchost.exe",
       "Comment": "Allows communication of Windows services, Service rules do not work. Associated services: AarSvc_71635, AJRouter, AppIDSvc, Appinfo, AppMgmt, AppReadiness, AppXSvc, AssignedAccessManagerSvc, AudioEndpointBuilder, Audiosrv, autotimesvc, AxInstSV, BcastDVRUserService_71635, BDESVC, BFE, BITS, BluetoothUserService_71635, BrokerInfrastructure, Browser, BTAGService, BthAvctpSvc, bthserv, camsvc, CaptureService_71635, cbdhsvc_71635, CDPSvc, CDPUserSvc_71635, CertPropSvc, ClipSVC, CloudBackupRestoreSvc_71635, cloudidsvc, CmService, ConsentUxUserSvc_71635, CoreMessagingRegistrar, CryptSvc, CscService, DcomLaunch, dcsvc, defragsvc, DeviceAssociationBrokerSvc_71635, DeviceAssociationService, DeviceInstall, DevicePickerUserSvc_71635, DevicesFlowUserSvc_71635, DevQueryBroker, Dhcp, diagsvc, DiagTrack, DialogBlockingService, DispBrokerDesktopSvc, DisplayEnhancementService, DmEnrollmentSvc, dmwappushservice, Dnscache, DoSvc, dot3svc, DPS, DsmSvc, DsSvc, DusmSvc, EapHost, embeddedmode, EntAppSvc, EventLog, EventSystem, fdPHost, FDResPub, fhsvc, FontCache, FrameServer, FrameServerMonitor, gpsvc, GraphicsPerfSvc, HgClientService, hidserv, HNS, HvHost, icssvc, IKEEXT, InstallService, InventorySvc, iphlpsvc, IpxlatCfgSvc, KtmRm, LanmanServer, LanmanWorkstation, lfsvc, LicenseManager, lltdsvc, lmhosts, LSM, LxpSvc, LxssManager, MapsBroker, MessagingService_71635, MixedRealityOpenXRSvc, mpssvc, MSiSCSI, MsKeyboardFilter, NaturalAuthentication, NcaSvc, NcbService, NcdAutoSetup, Netman, netprofm, NetSetupSvc, NgcCtnrSvc, NgcSvc, NlaSvc, nsi, nvagent, OneSyncSvc_71635, p2pimsvc, p2psvc, P9RdrService_71635, PcaSvc, PeerDistSvc, PenService_71635, PhoneSvc, PimIndexMaintenanceSvc_71635, pla, PlugPlay, PNRPAutoReg, PNRPsvc, PolicyAgent, Power, PrintNotify, PrintWorkflowUserSvc_71635, ProfSvc, PushToInstall, QWAVE, RasAuto, RasMan, RemoteAccess, RemoteRegistry, RetailDemo, RmSvc, RpcEptMapper, RpcSs, SCardSvr, ScDeviceEnum, Schedule, SCPolicySvc, SDRSVC, seclogon, SEMgrSvc, SENS, SensorService, SensrSvc, SessionEnv, SharedAccess, SharedRealitySvc, ShellHWDetection, shpamsvc, smphost, SmsRouter, SSDPSRV, SstpSvc, StateRepository, StiSvc, StorSvc, svsvc, swprv, SysMain, SystemEventsBroker, TapiSrv, TermService, TextInputManagementService, Themes, TimeBrokerSvc, TokenBroker, TrkWks, TroubleshootingSvc, tzautoupdate, UdkUserSvc_71635, UmRdpService, UnistoreSvc_71635, upnphost, UserDataSvc_71635, UserManager, UsoSvc, VacSvc, vmicguestinterface, vmicheartbeat, vmickvpexchange, vmicrdv, vmicshutdown, vmictimesync, vmicvmsession, vmicvss, W32Time, WalletService, WarpJITSvc, WbioSrvc, Wcmsvc, wcncsvc, WdiServiceHost, WdiSystemHost, WebClient, webthreatdefsvc, webthreatdefusersvc_71635, Wecsvc, WEPHOSTSVC, wercplsupport, WerSvc, WFDSConMgrSvc, WiaRpc, WinHttpAutoProxySvc, Winmgmt, WinRM, wisvc, WlanSvc, wlidsvc, wlpasvc, WManSvc, workfolderssvc, WpcMonSvc, WPDBusEnum, WpnService, WpnUserService_71635, wscsvc, wuauserv, WwanSvc, XblAuthManager, XblGameSave, XboxGipSvc, XboxNetApiSvc."
+    },
+    {
+      "DisplayName": "FH-BlockAllOutbound",
+      "Description": "FH Block All Rule Disabled by default. To be enabled, if all outbound traffic must be blocked.",
+      "Program": "Any",
+      "Action": "Block",
+      "Enabled": "False"
+    }
+  ],
+  "Browsers": [
+    {
+      "Description": "Product: Google Chrome. ",
+      "Program": "c:\\program files\\google\\chrome\\application\\chrome.exe"
+    },
+    {
+      "Description": "Product: Firefox. ",
+      "Program": "c:\\program files\\mozilla firefox\\firefox.exe"
+    },
+    {
+      "Description": "Product: Microsoft Edge. ",
+      "Program": "c:\\program files (x86)\\microsoft\\edge\\application\\msedge.exe"
+    }
+  ],
+  "BrowserHelpers": [
+    {
+      "Description": "Product: Google Update. FileDescription: Google Installer. Associated services: gupdate, gupdatem. ",
+      "Program": "c:\\program files (x86)\\google\\update\\googleupdate.exe"
+    },
+    {
+      "Description": "Product: Microsoft Edge Update. Associated services: edgeupdate, edgeupdatem. ",
+      "Program": "c:\\program files (x86)\\microsoft\\edgeupdate\\microsoftedgeupdate.exe"
+    }
+  ],
+  "Windows": [
+    {
+      "Description": "Product: PowerShell. FileDescription: pwsh. ",
+      "Program": "c:\\program files\\powershell\\7\\pwsh.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Windows Explorer. ",
+      "Program": "c:\\windows\\explorer.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Settings. ",
+      "Program": "c:\\windows\\immersivecontrolpanel\\systemsettings.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Device Census. ",
+      "Program": "c:\\windows\\system32\\devicecensus.exe"
+    },
+    {
+      "Description": "Product: Microsoft Malware Protection. FileDescription: Microsoft Malware Protection Signature Update Stub. ",
+      "Program": "c:\\windows\\system32\\mpsigstub.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Windows host process (Rundll32). ",
+      "Program": "c:\\windows\\system32\\rundll32.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: SIH Client. ",
+      "Program": "c:\\windows\\system32\\sihclient.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Host Process for Windows Tasks. ",
+      "Program": "c:\\windows\\system32\\taskhostw.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: MoUSO Core Worker Process. ",
+      "Program": "c:\\windows\\uus\\packages\\preview\\amd64\\mousocoreworker.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: App Uri Handlers Registration Verifier. ",
+      "Program": "c:\\windows\\system32\\apphostregistrationverifier.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Device Association Framework Provider Host. ",
+      "Program": "c:\\windows\\system32\\dashost.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Windows Defender SmartScreen. ",
+      "Program": "c:\\windows\\system32\\smartscreen.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Windows Problem Reporting. ",
+      "Program": "c:\\windows\\system32\\werfault.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Windows Problem Reporting. ",
+      "Program": "c:\\windows\\system32\\wermgr.exe"
+    },
+    {
+      "Description": "Product: Microsoft® Windows® Operating System. FileDescription: Windows PowerShell. ",
+      "Program": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe"
+    }
+  ],
+  "HP": [
+    {
+      "Description": "Product: HPUpdate. ",
+      "Program": "c:\\program files (x86)\\hp\\hp support framework\\resources\\hpupdate\\hpupdate.exe"
+    },
+    {
+      "Description": "Product: HP Security Update Service. FileDescription: HP Security Update Service 4.4.7.365. Associated services: SecurityUpdateService. Service details: Connects installed HP security applications to the online Controller service.. ",
+      "Program": "c:\\program files\\hp\\security update service\\4.4.7.365\\securityupdateservice.exe"
+    },
+    {
+      "Description": "Product: Sure Click. FileDescription: HP Sure Click. ",
+      "Program": "c:\\program files\\hp\\sure click\\servers\\brhostsvr.exe"
+    },
+    {
+      "Description": "Product: HP Touchpoint Analytics Client. FileDescription: HP Touchpoint Analytics Client Service. Associated services: HpTouchpointAnalyticsService. Service details: . ",
+      "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpanalyticscomp.inf_amd64_83b4a127df981b67\\x64\\touchpointanalyticsclientservice.exe"
+    },
+    {
+      "Description": "Product: SysInfoCap. FileDescription: . Associated services: HPSysInfoCap. Service details: . ",
+      "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\sysinfocap.exe"
+    },
+    {
+      "Description": "Product: AppHelperCap. FileDescription: . Associated services: HPAppHelperCap. Service details: . ",
+      "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\apphelpercap.exe"
+    },
+    {
+      "Description": "Product: BridgeCommunication. FileDescription: . ",
+      "Program": "c:\\windows\\system32\\driverstore\\filerepository\\hpcustomcapcomp.inf_amd64_b0931ab6230d32f6\\x64\\bridgecommunication.exe"
+    }
+  ],
+  "Unsorted": [
+    {
+      "Description": "Product: µTorrent. ",
+      "Program": "c:\\program files (x86)\\utorrent\\utorrent.exe"
+    },
+    {
+      "Description": "Product: Git. ",
+      "Program": "c:\\program files\\git\\mingw64\\libexec\\git-core\\git-remote-https.exe"
+    },
+    {
+      "Description": "Product: Git. ",
+      "Program": "c:\\program files\\git\\usr\\bin\\ssh.exe"
     }
   ]
 }

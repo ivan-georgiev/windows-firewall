@@ -19,7 +19,7 @@ function Compare-FHWithBaselineReport {
     Write-Verbose -Message "Active network profile: [$activeProfile]"
 
     Write-Verbose -Message "Generate CurrentState report for active profile started"
-    $entities = Get-FHFirewallAuthorizedEntities -NetworkProfileName $activeProfile -ErrorAction Stop -Verbose
+    $entities = Get-FHFirewallAuthorizedEntities -NetworkProfileName $activeProfile -ErrorAction Stop -Verbose:$false
     Write-Verbose -Message "Generate CurrentState report for active profile completed"
   }
 
@@ -88,7 +88,9 @@ function Compare-FHWithBaselineReport {
       ID        = @(4946)
     } -ErrorAction Stop -Verbose:$false | Sort-Object -Property TimeCreated -Descending
 
-    Write-Verbose -Message "`n === Rule changes events:`n $($events.Message.ToString().Split([Environment]::NewLine) | Select-String 'Rule Name:')`n`n"
+    $rulesList = $events.Message | `
+      ForEach-Object -Process { $_.ToString().Split([Environment]::NewLine) | Select-String 'Rule Name:' }
+    Write-Verbose -Message "`n === Rule changes events:`n$($rulesList -join "`n")`n`n"
   } catch {
     # if there are no events return $null
     if ($_.Exception.Message -eq "No events were found that match the specified selection criteria.") {

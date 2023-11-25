@@ -65,11 +65,17 @@
 
     $comment = [System.Text.StringBuilder]::new()
     $description = [System.Text.StringBuilder]::new()
+    $order = 2
 
     # file details
-    $itemDetails = Get-Item -Path $item.ProcessesExe -ErrorAction Stop
+    try {
+      $itemDetails = Get-Item -Path $item.ProcessesExe -ErrorAction Stop
+    } catch [System.Management.Automation.ItemNotFoundException] {
+      Write-Warning -Message "File [$($item.ProcessesExe)] contacted IPs [$($item.BlockedIps -join ', ')] not found. Probably was temporary file and there is no need to create a rule. Skip."
+      continue
+    }
     [void] $description.Append("Product: $($itemDetails.VersionInfo.ProductName). ")
-    if ($itemDetails.VersionInfo.ProductProductName -ne $itemDetails.VersionInfo.FileDescription) {
+    if ($itemDetails.VersionInfo.ProductName -ne $itemDetails.VersionInfo.FileDescription) {
       [void] $description.Append("FileDescription: $($itemDetails.VersionInfo.FileDescription). ")
     }
 
@@ -88,19 +94,22 @@
           Program     = $item.ProcessesExe
           Description = $description.ToString()
         })
+      $order = 1
+    } else {
+      [void]$comment.Append("Firewall Rules: $($rules -join ', '). ")
     }
-  } else {
-    [void]$comment.Append("Firewall Rules: $($rules -join ', '). ")
+
+    [void]$comment.Append("IPs: $($item.BlockedIps -join ', '). ")
+    [void]$comment.Append("Connections count: $($item.Counter). ")
+
+    [void] $report.add(@{
+        Program     = $item.ProcessesExe
+        Description = $description.ToString()
+        Comment     = $comment.ToString()
+        Order       = $order
+      })
+
   }
-
-  [void]$comment.Append("IPs: $($item.BlockedIps -join ', '). ")
-  [void]$comment.Append("Connections count: $($item.Counter). ")
-
-  [void] $report.add(@{
-      Program     = $item.ProcessesExe
-      Description = $description.ToString()
-      Comment     = $comment.ToString()
-    })
 
   if (($report | Measure-Object).Count -eq 0) {
     Write-Verbose -Message "Nothing to report. No files will be created."
@@ -109,7 +118,9 @@
 
   # save report rules to file
   Write-Verbose -Message "Saving Report to file [$reportFilename]"
-  $report | Sort-Object -Property "Program", "Service" | ConvertTo-Json -Depth 5 -ErrorAction Stop | Out-File -FilePath $reportFilename -Encoding utf8 -Confirm:$false -ErrorAction Stop
+  $report | Sort-Object -Property "Order", "Program", "Service" | Select-Object -ExcludeProperty "Order" | `
+    ConvertTo-Json -Depth 5 -ErrorAction Stop | `
+    Out-File -FilePath $reportFilename -Encoding utf8 -Confirm:$false -ErrorAction Stop
 
   # save config file, if not empty
   $programRulesCount = ($config | Measure-Object).Count
@@ -121,7 +132,9 @@
 
   # save config rules to file
   Write-Verbose -Message "Saving Config to file [$configFilename]"
-  $config | Sort-Object -Property "Program", "Service" | ConvertTo-Json -Depth 5 -ErrorAction Stop | Out-File -FilePath $configFilename -Encoding utf8 -Confirm:$false -ErrorAction Stop
+  $config | Sort-Object -Property "Program", "Service" | `
+    ConvertTo-Json -Depth 5 -ErrorAction Stop | `
+    Out-File -FilePath $configFilename -Encoding utf8 -Confirm:$false -ErrorAction Stop
 
   # return filename
   $configFilename
